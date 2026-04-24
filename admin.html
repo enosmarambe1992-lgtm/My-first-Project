@@ -6,952 +6,627 @@
   <title>GreenRoots Admin</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
-
   <style>
     :root {
-      --green-deep:  #1a3d2b;
-      --green-mid:   #2d6a4f;
-      --green-soft:  #52b788;
-      --green-light: #b7e4c7;
-      --green-pale:  #f0faf4;
-      --amber:       #e9a827;
-      --amber-light: #fdf3d8;
-      --brown:       #6b4226;
-      --red:         #c0392b;
-      --red-light:   #fdecea;
-      --cream:       #fdfaf5;
-      --text-dark:   #1c2b1e;
-      --text-mid:    #3a5041;
-      --text-muted:  #7a9a82;
-      --border:      #d4e8db;
-      --radius:      12px;
-      --shadow-sm:   0 2px 8px rgba(26,61,43,.10);
-      --shadow-md:   0 6px 24px rgba(26,61,43,.14);
-      --transition:  .25s ease;
+      --green-deep:  #1a3d2b; --green-mid: #2d6a4f; --green-soft: #52b788;
+      --green-light: #b7e4c7; --green-pale: #f0faf4;
+      --amber: #e9a827; --amber-light: #fdf3d8; --brown: #6b4226;
+      --red: #c0392b; --red-light: #fdecea; --cream: #fdfaf5;
+      --text-dark: #1c2b1e; --text-mid: #3a5041; --text-muted: #7a9a82;
+      --border: #d4e8db; --radius: 12px;
+      --shadow-sm: 0 2px 8px rgba(26,61,43,.10);
+      --shadow-md: 0 6px 24px rgba(26,61,43,.14);
+      --transition: .25s ease;
     }
-
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body {
-      font-family: 'Lato', sans-serif;
-      background: #f4f7f5;
-      color: var(--text-dark);
-      min-height: 100vh;
-    }
+    body { font-family: 'Lato', sans-serif; background: #f4f7f5; color: var(--text-dark); min-height: 100vh; }
 
-    /* ── Login Screen ──────────────────────────────── */
-    #login-screen {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background:
-        linear-gradient(145deg, rgba(26,61,43,.9), rgba(45,106,79,.8)),
-        url('https://images.unsplash.com/photo-1500651230702-0e2d8a49d4ad?w=1200&auto=format&fit=crop') center/cover;
-      padding: 1.5rem;
-    }
-    .login-box {
-      background: #fff;
-      border-radius: 20px;
-      padding: 3rem 2.5rem;
-      width: 100%;
-      max-width: 400px;
-      box-shadow: 0 24px 60px rgba(0,0,0,.25);
-      text-align: center;
-      animation: fadeUp .5s ease both;
-    }
-    .login-logo {
-      font-size: 2.8rem;
-      margin-bottom: .5rem;
-    }
-    .login-box h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.7rem;
-      color: var(--green-deep);
-      margin-bottom: .3rem;
-    }
-    .login-box p {
-      font-size: .9rem;
-      color: var(--text-muted);
-      margin-bottom: 2rem;
-    }
-    .input-group {
-      position: relative;
-      margin-bottom: 1rem;
-    }
-    .input-group input {
-      width: 100%;
-      padding: .85rem 1.1rem .85rem 2.8rem;
-      border: 1.5px solid var(--border);
-      border-radius: var(--radius);
-      font-size: .97rem;
-      font-family: 'Lato', sans-serif;
-      color: var(--text-dark);
-      transition: border-color var(--transition);
-      outline: none;
-      background: var(--green-pale);
-    }
+    /* LOGIN */
+    #login-screen { min-height: 100vh; display: flex; align-items: center; justify-content: center; background: linear-gradient(145deg,rgba(26,61,43,.9),rgba(45,106,79,.8)), url('https://images.unsplash.com/photo-1500651230702-0e2d8a49d4ad?w=1200&auto=format&fit=crop') center/cover; padding: 1.5rem; }
+    .login-box { background: #fff; border-radius: 20px; padding: 3rem 2.5rem; width: 100%; max-width: 400px; box-shadow: 0 24px 60px rgba(0,0,0,.25); text-align: center; animation: fadeUp .5s ease both; }
+    .login-logo { font-size: 2.8rem; margin-bottom: .5rem; }
+    .login-box h1 { font-family: 'Playfair Display', serif; font-size: 1.7rem; color: var(--green-deep); margin-bottom: .3rem; }
+    .login-box > p { font-size: .9rem; color: var(--text-muted); margin-bottom: 2rem; }
+    .input-group { position: relative; margin-bottom: 1rem; }
+    .input-group input { width: 100%; padding: .85rem 1.1rem .85rem 2.8rem; border: 1.5px solid var(--border); border-radius: var(--radius); font-size: .97rem; font-family: 'Lato', sans-serif; color: var(--text-dark); outline: none; background: var(--green-pale); transition: border-color var(--transition); }
     .input-group input:focus { border-color: var(--green-soft); background: #fff; }
-    .input-group .icon {
-      position: absolute;
-      left: .9rem;
-      top: 50%;
-      transform: translateY(-50%);
-      font-size: 1rem;
-    }
-    .login-btn {
-      width: 100%;
-      padding: .9rem;
-      background: var(--green-mid);
-      color: #fff;
-      border: none;
-      border-radius: var(--radius);
-      font-size: 1rem;
-      font-weight: 700;
-      font-family: 'Lato', sans-serif;
-      cursor: pointer;
-      transition: background var(--transition), transform var(--transition);
-      margin-top: .5rem;
-    }
+    .input-group .icon { position: absolute; left: .9rem; top: 50%; transform: translateY(-50%); font-size: 1rem; }
+    .login-btn { width: 100%; padding: .9rem; background: var(--green-mid); color: #fff; border: none; border-radius: var(--radius); font-size: 1rem; font-weight: 700; font-family: 'Lato', sans-serif; cursor: pointer; transition: background var(--transition), transform var(--transition); margin-top: .5rem; }
     .login-btn:hover { background: var(--green-deep); transform: translateY(-2px); }
-    .login-error {
-      color: var(--red);
-      font-size: .85rem;
-      margin-top: .8rem;
-      display: none;
-    }
-    .login-hint {
-      font-size: .78rem;
-      color: var(--text-muted);
-      margin-top: 1.5rem;
-      background: var(--amber-light);
-      border-radius: 8px;
-      padding: .6rem .9rem;
-    }
+    .login-error { color: var(--red); font-size: .85rem; margin-top: .8rem; display: none; }
+    .login-hint { font-size: .78rem; color: var(--text-muted); margin-top: 1.5rem; background: var(--amber-light); border-radius: 8px; padding: .6rem .9rem; }
 
-    /* ── Dashboard Layout ──────────────────────────── */
+    /* DASHBOARD */
     #dashboard { display: none; min-height: 100vh; }
-
-    /* Sidebar */
-    .sidebar {
-      position: fixed;
-      top: 0; left: 0; bottom: 0;
-      width: 230px;
-      background: var(--green-deep);
-      display: flex;
-      flex-direction: column;
-      z-index: 100;
-      transition: transform var(--transition);
-    }
-    .sidebar-logo {
-      padding: 1.6rem 1.4rem 1.2rem;
-      border-bottom: 1px solid rgba(255,255,255,.1);
-    }
-    .sidebar-logo h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.2rem;
-      color: var(--green-light);
-    }
-    .sidebar-logo span { font-size: 1.4rem; }
+    .sidebar { position: fixed; top: 0; left: 0; bottom: 0; width: 230px; background: var(--green-deep); display: flex; flex-direction: column; z-index: 100; transition: transform var(--transition); }
+    .sidebar-logo { padding: 1.6rem 1.4rem 1.2rem; border-bottom: 1px solid rgba(255,255,255,.1); }
+    .sidebar-logo h2 { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--green-light); }
     .sidebar-logo p { font-size: .75rem; color: rgba(255,255,255,.45); margin-top: .15rem; }
     .sidebar-nav { flex: 1; padding: 1.2rem 0; }
-    .nav-item {
-      display: flex;
-      align-items: center;
-      gap: .75rem;
-      padding: .75rem 1.4rem;
-      cursor: pointer;
-      color: rgba(255,255,255,.65);
-      font-size: .92rem;
-      font-weight: 700;
-      transition: background var(--transition), color var(--transition);
-      border-left: 3px solid transparent;
-    }
+    .nav-item { display: flex; align-items: center; gap: .75rem; padding: .75rem 1.4rem; cursor: pointer; color: rgba(255,255,255,.65); font-size: .92rem; font-weight: 700; transition: background var(--transition), color var(--transition); border-left: 3px solid transparent; }
     .nav-item:hover { background: rgba(255,255,255,.07); color: #fff; }
     .nav-item.active { background: rgba(255,255,255,.1); color: #fff; border-left-color: var(--amber); }
-    .nav-item .nav-icon { font-size: 1.1rem; }
-    .sidebar-footer {
-      padding: 1rem 1.4rem;
-      border-top: 1px solid rgba(255,255,255,.1);
-    }
-    .logout-btn {
-      width: 100%;
-      padding: .6rem;
-      background: rgba(192,57,43,.2);
-      color: #ff9f9f;
-      border: 1px solid rgba(192,57,43,.3);
-      border-radius: 8px;
-      font-size: .85rem;
-      font-weight: 700;
-      font-family: 'Lato', sans-serif;
-      cursor: pointer;
-      transition: background var(--transition);
-    }
+    .sidebar-footer { padding: 1rem 1.4rem; border-top: 1px solid rgba(255,255,255,.1); }
+    .logout-btn { width: 100%; padding: .6rem; background: rgba(192,57,43,.2); color: #ff9f9f; border: 1px solid rgba(192,57,43,.3); border-radius: 8px; font-size: .85rem; font-weight: 700; font-family: 'Lato', sans-serif; cursor: pointer; transition: background var(--transition); }
     .logout-btn:hover { background: rgba(192,57,43,.4); }
-
-    /* Main */
-    .main {
-      margin-left: 230px;
-      padding: 2rem;
-      min-height: 100vh;
-    }
-    .topbar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 2rem;
-    }
-    .topbar h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.8rem;
-      color: var(--green-deep);
-    }
+    .main { margin-left: 230px; padding: 2rem; min-height: 100vh; }
+    .topbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem; }
+    .topbar h1 { font-family: 'Playfair Display', serif; font-size: 1.8rem; color: var(--green-deep); }
     .topbar p { font-size: .88rem; color: var(--text-muted); margin-top: .15rem; }
-    .save-all-btn {
-      background: var(--green-mid);
-      color: #fff;
-      border: none;
-      border-radius: 50px;
-      padding: .65rem 1.6rem;
-      font-size: .9rem;
-      font-weight: 700;
-      font-family: 'Lato', sans-serif;
-      cursor: pointer;
-      transition: background var(--transition), transform var(--transition);
-      display: flex;
-      align-items: center;
-      gap: .5rem;
-    }
+    .save-all-btn { background: var(--green-mid); color: #fff; border: none; border-radius: 50px; padding: .65rem 1.6rem; font-size: .9rem; font-weight: 700; font-family: 'Lato', sans-serif; cursor: pointer; transition: background var(--transition), transform var(--transition); display: flex; align-items: center; gap: .5rem; }
     .save-all-btn:hover { background: var(--green-deep); transform: translateY(-2px); }
+    .save-all-btn:disabled { opacity: .6; cursor: not-allowed; transform: none; }
 
-    /* Panels */
+    /* PANELS */
     .panel { display: none; animation: fadeUp .3s ease both; }
     .panel.active { display: block; }
-
-    /* Stats row */
-    .stats-row {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-      gap: 1.2rem;
-      margin-bottom: 2rem;
-    }
-    .stat-card {
-      background: #fff;
-      border-radius: var(--radius);
-      padding: 1.3rem 1.4rem;
-      box-shadow: var(--shadow-sm);
-      border-left: 4px solid var(--green-soft);
-    }
+    .stats-row { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px,1fr)); gap: 1.2rem; margin-bottom: 2rem; }
+    .stat-card { background: #fff; border-radius: var(--radius); padding: 1.3rem 1.4rem; box-shadow: var(--shadow-sm); border-left: 4px solid var(--green-soft); }
     .stat-card.amber { border-left-color: var(--amber); }
     .stat-card.red   { border-left-color: var(--red); }
     .stat-card p { font-size: .78rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: .08em; margin-bottom: .3rem; }
     .stat-card strong { font-family: 'Playfair Display', serif; font-size: 1.8rem; color: var(--green-deep); }
-
-    /* Section card */
-    .section-card {
-      background: #fff;
-      border-radius: var(--radius);
-      box-shadow: var(--shadow-sm);
-      margin-bottom: 1.5rem;
-      overflow: hidden;
-    }
-    .section-card-header {
-      padding: 1.1rem 1.4rem;
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .section-card-header h3 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.1rem;
-      color: var(--green-deep);
-    }
+    .section-card { background: #fff; border-radius: var(--radius); box-shadow: var(--shadow-sm); margin-bottom: 1.5rem; overflow: hidden; }
+    .section-card-header { padding: 1.1rem 1.4rem; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+    .section-card-header h3 { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--green-deep); }
     .section-card-body { padding: 1.4rem; }
 
-    /* Form fields */
-    label {
-      display: block;
-      font-size: .82rem;
-      font-weight: 700;
-      color: var(--text-mid);
-      text-transform: uppercase;
-      letter-spacing: .07em;
-      margin-bottom: .4rem;
-    }
-    input[type="text"],
-    input[type="number"],
-    input[type="url"],
-    textarea,
-    select {
-      width: 100%;
-      padding: .75rem 1rem;
-      border: 1.5px solid var(--border);
-      border-radius: 8px;
-      font-size: .95rem;
-      font-family: 'Lato', sans-serif;
-      color: var(--text-dark);
-      background: var(--green-pale);
-      outline: none;
-      transition: border-color var(--transition);
-      margin-bottom: 1rem;
-    }
-    input:focus, textarea:focus, select:focus {
-      border-color: var(--green-soft);
-      background: #fff;
-    }
+    /* FORMS */
+    label { display: block; font-size: .82rem; font-weight: 700; color: var(--text-mid); text-transform: uppercase; letter-spacing: .07em; margin-bottom: .4rem; }
+    input[type="text"], input[type="number"], input[type="url"], textarea, select { width: 100%; padding: .75rem 1rem; border: 1.5px solid var(--border); border-radius: 8px; font-size: .95rem; font-family: 'Lato', sans-serif; color: var(--text-dark); background: var(--green-pale); outline: none; transition: border-color var(--transition); margin-bottom: 1rem; }
+    input:focus, textarea:focus, select:focus { border-color: var(--green-soft); background: #fff; }
     textarea { resize: vertical; min-height: 80px; }
-    .form-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1rem;
-    }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
 
-    /* Product cards in admin */
+    /* PRODUCT ITEMS */
     .product-list { display: flex; flex-direction: column; gap: 1rem; }
-    .product-item {
-      border: 1.5px solid var(--border);
-      border-radius: var(--radius);
-      overflow: hidden;
-      transition: border-color var(--transition);
-    }
+    .product-item { border: 1.5px solid var(--border); border-radius: var(--radius); overflow: hidden; transition: border-color var(--transition); }
     .product-item:hover { border-color: var(--green-soft); }
-    .product-item-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: .85rem 1.2rem;
-      background: var(--green-pale);
-      cursor: pointer;
-    }
-    .product-item-header .prod-title {
-      font-weight: 700;
-      color: var(--green-deep);
-      display: flex;
-      align-items: center;
-      gap: .6rem;
-    }
-    .prod-badge {
-      font-size: .7rem;
-      font-weight: 700;
-      padding: .2rem .6rem;
-      border-radius: 50px;
-      background: var(--green-light);
-      color: var(--green-deep);
-    }
+    .product-item-header { display: flex; align-items: center; justify-content: space-between; padding: .85rem 1.2rem; background: var(--green-pale); cursor: pointer; }
+    .prod-title { font-weight: 700; color: var(--green-deep); display: flex; align-items: center; gap: .6rem; }
+    .prod-badge { font-size: .7rem; font-weight: 700; padding: .2rem .6rem; border-radius: 50px; background: var(--green-light); color: var(--green-deep); }
     .toggle-icon { font-size: .85rem; color: var(--text-muted); transition: transform var(--transition); }
     .product-item.open .toggle-icon { transform: rotate(180deg); }
     .product-item-body { display: none; padding: 1.2rem; border-top: 1px solid var(--border); }
     .product-item.open .product-item-body { display: block; }
 
-    /* Order table */
+    /* ORDERS TABLE */
     .orders-table { width: 100%; border-collapse: collapse; }
-    .orders-table th {
-      text-align: left;
-      font-size: .78rem;
-      text-transform: uppercase;
-      letter-spacing: .08em;
-      color: var(--text-muted);
-      padding: .6rem .9rem;
-      border-bottom: 2px solid var(--border);
-    }
-    .orders-table td {
-      padding: .85rem .9rem;
-      border-bottom: 1px solid var(--border);
-      font-size: .92rem;
-      color: var(--text-dark);
-    }
+    .orders-table th { text-align: left; font-size: .78rem; text-transform: uppercase; letter-spacing: .08em; color: var(--text-muted); padding: .6rem .9rem; border-bottom: 2px solid var(--border); }
+    .orders-table td { padding: .85rem .9rem; border-bottom: 1px solid var(--border); font-size: .92rem; }
     .orders-table tr:last-child td { border-bottom: none; }
     .orders-table tr:hover td { background: var(--green-pale); }
-    .status-badge {
-      font-size: .75rem;
-      font-weight: 700;
-      padding: .25rem .75rem;
-      border-radius: 50px;
-    }
+    .status-badge { font-size: .75rem; font-weight: 700; padding: .25rem .75rem; border-radius: 50px; }
     .status-pending  { background: var(--amber-light); color: var(--brown); }
     .status-done     { background: var(--green-light); color: var(--green-deep); }
     .status-canceled { background: var(--red-light); color: var(--red); }
-    .action-btn {
-      background: none;
-      border: 1.5px solid var(--border);
-      border-radius: 6px;
-      padding: .3rem .7rem;
-      font-size: .8rem;
-      font-weight: 700;
-      cursor: pointer;
-      transition: all var(--transition);
-      font-family: 'Lato', sans-serif;
-    }
+    .action-btn { background: none; border: 1.5px solid var(--border); border-radius: 6px; padding: .3rem .7rem; font-size: .8rem; font-weight: 700; cursor: pointer; transition: all var(--transition); font-family: 'Lato', sans-serif; }
     .action-btn:hover { border-color: var(--green-soft); color: var(--green-mid); }
     .action-btn.danger:hover { border-color: var(--red); color: var(--red); }
 
-    /* Toast */
-    .toast {
-      position: fixed;
-      bottom: 2rem;
-      right: 2rem;
-      background: var(--green-deep);
-      color: #fff;
-      padding: .9rem 1.5rem;
-      border-radius: var(--radius);
-      font-weight: 700;
-      font-size: .92rem;
-      box-shadow: var(--shadow-md);
-      display: none;
-      align-items: center;
-      gap: .6rem;
-      z-index: 999;
-      animation: slideUp .3s ease;
-    }
+    /* ADD ORDER FORM */
+    .add-order-form { background: var(--green-pale); border-radius: var(--radius); padding: 1.2rem 1.4rem; margin-bottom: 1.5rem; border: 1.5px dashed var(--green-light); }
+    .add-order-form h4 { font-family: 'Playfair Display', serif; color: var(--green-deep); margin-bottom: 1rem; }
+
+    /* TOAST */
+    .toast { position: fixed; bottom: 2rem; right: 2rem; background: var(--green-deep); color: #fff; padding: .9rem 1.5rem; border-radius: var(--radius); font-weight: 700; font-size: .92rem; box-shadow: var(--shadow-md); display: none; align-items: center; gap: .6rem; z-index: 9999; animation: slideUp .3s ease; }
     .toast.show { display: flex; }
+    .toast.error { background: var(--red); }
 
-    /* Mobile sidebar toggle */
-    .menu-toggle {
-      display: none;
-      position: fixed;
-      top: 1rem; left: 1rem;
-      z-index: 200;
-      background: var(--green-deep);
-      color: #fff;
-      border: none;
-      border-radius: 8px;
-      padding: .55rem .75rem;
-      font-size: 1.2rem;
-      cursor: pointer;
-    }
+    /* MOBILE */
+    .menu-toggle { display: none; position: fixed; top: 1rem; left: 1rem; z-index: 200; background: var(--green-deep); color: #fff; border: none; border-radius: 8px; padding: .55rem .75rem; font-size: 1.2rem; cursor: pointer; }
+    .firebase-badge { display: inline-flex; align-items: center; gap: .4rem; background: #fff3e0; color: #e65100; font-size: .75rem; font-weight: 700; padding: .3rem .8rem; border-radius: 50px; border: 1px solid #ffcc80; }
+    .firebase-badge.connected { background: var(--green-pale); color: var(--green-mid); border-color: var(--green-light); }
 
-    /* Animations */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(16px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes slideUp {
-      from { opacity: 0; transform: translateY(12px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
+    @keyframes fadeUp  { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
+    @keyframes slideUp { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
 
-    /* Responsive */
     @media (max-width: 768px) {
       .sidebar { transform: translateX(-100%); }
       .sidebar.open { transform: translateX(0); }
       .main { margin-left: 0; padding: 1.2rem; padding-top: 4rem; }
       .menu-toggle { display: block; }
       .form-row { grid-template-columns: 1fr; }
-      .topbar { flex-direction: column; align-items: flex-start; gap: 1rem; }
       .stats-row { grid-template-columns: 1fr 1fr; }
     }
   </style>
 </head>
 <body>
 
-  <!-- ── LOGIN ──────────────────────────────────────── -->
-  <div id="login-screen">
-    <div class="login-box">
-      <div class="login-logo">🌿</div>
-      <h1>GreenRoots Admin</h1>
-      <p>Sign in to manage your farm dashboard</p>
+<!-- LOGIN -->
+<div id="login-screen">
+  <div class="login-box">
+    <div class="login-logo">🌿</div>
+    <h1>GreenRoots Admin</h1>
+    <p>Sign in to manage your farm dashboard</p>
+    <div class="input-group"><span class="icon">👤</span><input type="text" id="username" placeholder="Username" /></div>
+    <div class="input-group"><span class="icon">🔒</span><input type="password" id="password" placeholder="Password" onkeydown="if(event.key==='Enter')doLogin()" /></div>
+    <button class="login-btn" onclick="doLogin()">Sign In →</button>
+    <div class="login-error" id="login-error">❌ Incorrect username or password</div>
+    <div class="login-hint">💡 Default: <strong>admin</strong> / <strong>farm2025</strong><br><span style="font-size:.72rem">Change in admin.html script section</span></div>
+  </div>
+</div>
 
-      <div class="input-group">
-        <span class="icon">👤</span>
-        <input type="text" id="username" placeholder="Username" />
-      </div>
-      <div class="input-group">
-        <span class="icon">🔒</span>
-        <input type="password" id="password" placeholder="Password" onkeydown="if(event.key==='Enter') doLogin()" />
-      </div>
-      <button class="login-btn" onclick="doLogin()">Sign In →</button>
-      <div class="login-error" id="login-error">❌ Incorrect username or password</div>
+<!-- MOBILE TOGGLE -->
+<button class="menu-toggle" id="menu-toggle" onclick="toggleSidebar()" style="display:none">☰</button>
 
-      <div class="login-hint">
-        💡 Default: <strong>admin</strong> / <strong>farm2025</strong><br>
-        <span style="font-size:.72rem">(Change these inside admin.html)</span>
-      </div>
+<!-- DASHBOARD -->
+<div id="dashboard">
+  <div class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <h2>🌿 GreenRoots</h2>
+      <p>Farm Admin Panel</p>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-item active" onclick="showPanel('overview',this)"><span>📊</span> Overview</div>
+      <div class="nav-item" onclick="showPanel('products',this)"><span>📦</span> Products</div>
+      <div class="nav-item" onclick="showPanel('orders',this)"><span>🛒</span> Orders</div>
+      <div class="nav-item" onclick="showPanel('sales',this)"><span>💰</span> Sales</div>
+      <div class="nav-item" onclick="showPanel('hero',this)"><span>🖼️</span> Hero Text</div>
+    </nav>
+    <div class="sidebar-footer">
+      <button class="logout-btn" onclick="doLogout()">🚪 Log Out</button>
     </div>
   </div>
 
-  <!-- ── DASHBOARD ───────────────────────────────────── -->
-  <button class="menu-toggle" id="menu-toggle" onclick="toggleSidebar()">☰</button>
-
-  <div id="dashboard">
-    <!-- Sidebar -->
-    <div class="sidebar" id="sidebar">
-      <div class="sidebar-logo">
-        <h2><span>🌿</span> GreenRoots</h2>
-        <p>Farm Admin Panel</p>
+  <div class="main">
+    <div class="topbar">
+      <div>
+        <h1 id="panel-title">Overview</h1>
+        <p id="panel-sub">Welcome back! Here's what's happening on your farm.</p>
       </div>
-      <nav class="sidebar-nav">
-        <div class="nav-item active" onclick="showPanel('overview')">
-          <span class="nav-icon">📊</span> Overview
-        </div>
-        <div class="nav-item" onclick="showPanel('products')">
-          <span class="nav-icon">📦</span> Products
-        </div>
-        <div class="nav-item" onclick="showPanel('orders')">
-          <span class="nav-icon">🛒</span> Orders
-        </div>
-        <div class="nav-item" onclick="showPanel('sales')">
-          <span class="nav-icon">💰</span> Sales
-        </div>
-        <div class="nav-item" onclick="showPanel('hero')">
-          <span class="nav-icon">🖼️</span> Hero Text
-        </div>
-      </nav>
-      <div class="sidebar-footer">
-        <button class="logout-btn" onclick="doLogout()">🚪 Log Out</button>
+      <div style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap;">
+        <span class="firebase-badge" id="fb-badge">⏳ Connecting...</span>
+        <button class="save-all-btn" id="save-btn" onclick="saveCurrentPanel()">💾 Save Changes</button>
       </div>
     </div>
 
-    <!-- Main content -->
-    <div class="main">
-      <div class="topbar">
-        <div>
-          <h1 id="panel-title">Overview</h1>
-          <p id="panel-sub">Welcome back! Here's what's happening on your farm.</p>
-        </div>
-        <button class="save-all-btn" onclick="saveAll()">💾 Save Changes</button>
+    <!-- OVERVIEW -->
+    <div class="panel active" id="panel-overview">
+      <div class="stats-row">
+        <div class="stat-card"><p>Total Products</p><strong id="stat-products">—</strong></div>
+        <div class="stat-card amber"><p>Pending Orders</p><strong id="stat-pending">—</strong></div>
+        <div class="stat-card"><p>Completed</p><strong id="stat-done">—</strong></div>
+        <div class="stat-card red"><p>Cancelled</p><strong id="stat-canceled">—</strong></div>
       </div>
-
-      <!-- ── OVERVIEW ── -->
-      <div class="panel active" id="panel-overview">
-        <div class="stats-row">
-          <div class="stat-card">
-            <p>Total Products</p>
-            <strong id="stat-products">6</strong>
-          </div>
-          <div class="stat-card amber">
-            <p>Pending Orders</p>
-            <strong id="stat-pending">3</strong>
-          </div>
-          <div class="stat-card">
-            <p>Completed Orders</p>
-            <strong id="stat-done">12</strong>
-          </div>
-          <div class="stat-card red">
-            <p>Cancelled</p>
-            <strong id="stat-canceled">1</strong>
-          </div>
-        </div>
-
-        <div class="section-card">
-          <div class="section-card-header">
-            <h3>📋 Recent Orders</h3>
-          </div>
-          <div class="section-card-body" style="padding:0; overflow-x:auto;">
-            <table class="orders-table">
-              <thead>
-                <tr>
-                  <th>Customer</th>
-                  <th>Product</th>
-                  <th>Amount</th>
-                  <th>Status</th>
-                </tr>
-              </thead>
-              <tbody id="overview-orders-body"></tbody>
-            </table>
-          </div>
+      <div class="section-card">
+        <div class="section-card-header"><h3>📋 Recent Orders</h3></div>
+        <div class="section-card-body" style="padding:0;overflow-x:auto;">
+          <table class="orders-table">
+            <thead><tr><th>Customer</th><th>Product</th><th>Amount</th><th>Status</th></tr></thead>
+            <tbody id="overview-orders-body"><tr><td colspan="4" style="text-align:center;padding:2rem;color:var(--text-muted)">Loading...</td></tr></tbody>
+          </table>
         </div>
       </div>
+    </div>
 
-      <!-- ── PRODUCTS ── -->
-      <div class="panel" id="panel-products">
-        <div class="section-card">
-          <div class="section-card-header">
-            <h3>📦 Manage Products</h3>
-            <button class="save-all-btn" style="font-size:.82rem;padding:.5rem 1.1rem;" onclick="addProduct()">+ Add Product</button>
-          </div>
-          <div class="section-card-body">
-            <div class="product-list" id="product-list"></div>
-          </div>
+    <!-- PRODUCTS -->
+    <div class="panel" id="panel-products">
+      <div class="section-card">
+        <div class="section-card-header">
+          <h3>📦 Manage Products</h3>
+          <button class="save-all-btn" style="font-size:.82rem;padding:.5rem 1.1rem;" onclick="addProduct()">+ Add Product</button>
+        </div>
+        <div class="section-card-body">
+          <div class="product-list" id="product-list"><p style="color:var(--text-muted)">Loading products...</p></div>
         </div>
       </div>
+    </div>
 
-      <!-- ── ORDERS ── -->
-      <div class="panel" id="panel-orders">
-        <div class="section-card">
-          <div class="section-card-header">
-            <h3>🛒 All Orders</h3>
+    <!-- ORDERS -->
+    <div class="panel" id="panel-orders">
+      <div class="add-order-form">
+        <h4>➕ Add New Order</h4>
+        <div class="form-row">
+          <div><label>Customer Name</label><input type="text" id="new-customer" placeholder="e.g. Jane Wanjiru" /></div>
+          <div><label>Phone</label><input type="text" id="new-phone" placeholder="e.g. 0712345678" /></div>
+        </div>
+        <div class="form-row">
+          <div><label>Product</label><input type="text" id="new-product" placeholder="e.g. Roma Tomatoes" /></div>
+          <div><label>Quantity</label><input type="number" id="new-qty" placeholder="e.g. 2" min="1" /></div>
+        </div>
+        <div class="form-row">
+          <div><label>Amount (KSh)</label><input type="number" id="new-amount" placeholder="e.g. 160" /></div>
+          <div><label>Status</label>
+            <select id="new-status">
+              <option value="pending">Pending</option>
+              <option value="done">Done</option>
+              <option value="canceled">Canceled</option>
+            </select>
           </div>
-          <div class="section-card-body" style="padding:0; overflow-x:auto;">
-            <table class="orders-table">
-              <thead>
-                <tr>
-                  <th>Customer</th>
-                  <th>Phone</th>
-                  <th>Product</th>
-                  <th>Qty</th>
-                  <th>Amount</th>
-                  <th>Status</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody id="all-orders-body"></tbody>
-            </table>
-          </div>
+        </div>
+        <button class="save-all-btn" onclick="addOrder()">➕ Add Order</button>
+      </div>
+      <div class="section-card">
+        <div class="section-card-header"><h3>🛒 All Orders</h3></div>
+        <div class="section-card-body" style="padding:0;overflow-x:auto;">
+          <table class="orders-table">
+            <thead><tr><th>Customer</th><th>Phone</th><th>Product</th><th>Qty</th><th>Amount</th><th>Status</th><th>Actions</th></tr></thead>
+            <tbody id="all-orders-body"><tr><td colspan="7" style="text-align:center;padding:2rem;color:var(--text-muted)">Loading...</td></tr></tbody>
+          </table>
         </div>
       </div>
+    </div>
 
-      <!-- ── SALES ── -->
-      <div class="panel" id="panel-sales">
-        <div class="stats-row">
-          <div class="stat-card">
-            <p>Total Revenue</p>
-            <strong id="total-revenue">KSh 0</strong>
-          </div>
-          <div class="stat-card amber">
-            <p>This Week</p>
-            <strong id="week-revenue">KSh 0</strong>
-          </div>
-          <div class="stat-card">
-            <p>Avg Order</p>
-            <strong id="avg-order">KSh 0</strong>
-          </div>
+    <!-- SALES -->
+    <div class="panel" id="panel-sales">
+      <div class="stats-row">
+        <div class="stat-card"><p>Total Revenue</p><strong id="total-revenue">—</strong></div>
+        <div class="stat-card amber"><p>Pending Value</p><strong id="pending-revenue">—</strong></div>
+        <div class="stat-card"><p>Avg Order</p><strong id="avg-order">—</strong></div>
+      </div>
+      <div class="section-card">
+        <div class="section-card-header"><h3>💰 Sales by Product</h3></div>
+        <div class="section-card-body" style="padding:0;overflow-x:auto;">
+          <table class="orders-table">
+            <thead><tr><th>Product</th><th>Units Sold</th><th>Revenue</th></tr></thead>
+            <tbody id="sales-body"></tbody>
+          </table>
         </div>
-        <div class="section-card">
-          <div class="section-card-header"><h3>💰 Sales by Product</h3></div>
-          <div class="section-card-body" style="padding:0; overflow-x:auto;">
-            <table class="orders-table">
-              <thead>
-                <tr><th>Product</th><th>Units Sold</th><th>Revenue</th></tr>
-              </thead>
-              <tbody id="sales-body"></tbody>
-            </table>
+      </div>
+    </div>
+
+    <!-- HERO -->
+    <div class="panel" id="panel-hero">
+      <div class="section-card">
+        <div class="section-card-header"><h3>🖼️ Edit Hero Section</h3><span style="font-size:.8rem;color:var(--text-muted)">Changes go live instantly ✨</span></div>
+        <div class="section-card-body">
+          <label>Badge Text</label>
+          <input type="text" id="hero-badge" placeholder="🌱 100% Naturally Grown" />
+          <div class="form-row">
+            <div><label>Heading Line 1</label><input type="text" id="hero-line1" placeholder="Fresh From Our" /></div>
+            <div><label>Heading Line 2 (italic)</label><input type="text" id="hero-line2" placeholder="Farm" /></div>
+          </div>
+          <label>Subheading</label>
+          <textarea id="hero-sub" placeholder="Hand-picked vegetables..."></textarea>
+          <div class="form-row">
+            <div>
+              <label>Stat 1 — Number</label><input type="text" id="stat1-num" placeholder="50+" />
+              <label>Stat 1 — Label</label><input type="text" id="stat1-lbl" placeholder="Products" />
+            </div>
+            <div>
+              <label>Stat 2 — Number</label><input type="text" id="stat2-num" placeholder="10 yrs" />
+              <label>Stat 2 — Label</label><input type="text" id="stat2-lbl" placeholder="Experience" />
+            </div>
+          </div>
+          <div class="form-row">
+            <div><label>Stat 3 — Number</label><input type="text" id="stat3-num" placeholder="500+" /></div>
+            <div><label>Stat 3 — Label</label><input type="text" id="stat3-lbl" placeholder="Happy Families" /></div>
           </div>
         </div>
       </div>
+    </div>
+  </div>
+</div>
 
-      <!-- ── HERO TEXT ── -->
-      <div class="panel" id="panel-hero">
-        <div class="section-card">
-          <div class="section-card-header"><h3>🖼️ Edit Hero Section</h3></div>
-          <div class="section-card-body">
-            <label>Main Heading Line 1</label>
-            <input type="text" id="hero-line1" placeholder="e.g. Fresh From Our" />
-            <label>Main Heading Line 2 (highlighted)</label>
-            <input type="text" id="hero-line2" placeholder="e.g. Farm" />
-            <label>Subheading</label>
-            <textarea id="hero-sub" placeholder="e.g. Hand-picked vegetables..."></textarea>
-            <label>Badge Text</label>
-            <input type="text" id="hero-badge" placeholder="e.g. 🌱 100% Naturally Grown" />
-            <div class="form-row">
-              <div>
-                <label>Stat 1 — Number</label>
-                <input type="text" id="stat1-num" placeholder="e.g. 50+" />
-                <label>Stat 1 — Label</label>
-                <input type="text" id="stat1-lbl" placeholder="e.g. Products" />
-              </div>
-              <div>
-                <label>Stat 2 — Number</label>
-                <input type="text" id="stat2-num" placeholder="e.g. 10 yrs" />
-                <label>Stat 2 — Label</label>
-                <input type="text" id="stat2-lbl" placeholder="e.g. Experience" />
-              </div>
-            </div>
-            <label>Stat 3 — Number</label>
-            <input type="text" id="stat3-num" placeholder="e.g. 500+" />
-            <label>Stat 3 — Label</label>
-            <input type="text" id="stat3-lbl" placeholder="e.g. Happy Families" />
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
 
-            <div style="background:var(--amber-light);border-radius:8px;padding:.9rem 1.1rem;font-size:.85rem;color:var(--brown);">
-              💡 <strong>Note:</strong> These changes are saved locally in your browser. To update the live site, copy the values into <code>index.html</code> manually.
-            </div>
-          </div>
-        </div>
-      </div>
+<!-- FIREBASE -->
+<script type="module">
+  import { initializeApp }    from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+  import { getFirestore, collection, getDocs, addDoc, updateDoc, deleteDoc, doc, setDoc, onSnapshot }
+    from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-    </div><!-- /main -->
-  </div><!-- /dashboard -->
+  // ── CHANGE YOUR LOGIN HERE ──────────────────────────
+  window.ADMIN_USER = 'admin';
+  window.ADMIN_PASS = 'farm2025';
 
-  <!-- Toast -->
-  <div class="toast" id="toast">✅ Changes saved!</div>
+  const firebaseConfig = {
+    apiKey:            "AIzaSyDQw26104o-G5QK8WJTJQsesUzUZmKlaMk",
+    authDomain:        "greenroots-farm.firebaseapp.com",
+    projectId:         "greenroots-farm",
+    storageBucket:     "greenroots-farm.firebasestorage.app",
+    messagingSenderId: "49289137888",
+    appId:             "1:49289137888:web:ddd0ed682f1ba4b01a8a85",
+    measurementId:     "G-LL3SSCTLPD"
+  };
 
-  <script>
-    // ── CONFIG — change these! ──────────────────────
-    const ADMIN_USER = 'admin';
-    const ADMIN_PASS = 'farm2025';
+  const app = initializeApp(firebaseConfig);
+  const db  = getFirestore(app);
+  window._db = db;
 
-    // ── Default data ────────────────────────────────
-    const defaultProducts = [
-      { id: 1, name: 'Roma Tomatoes',   category: 'Vegetable', price: 80,  unit: 'kg',       desc: 'Firm, ripe, and perfect for cooking or salads.' },
-      { id: 2, name: 'Fresh Spinach',   category: 'Vegetable', price: 50,  unit: 'bunch',     desc: 'Tender, dark-green leaves loaded with iron.' },
-      { id: 3, name: 'Sweet Apples',    category: 'Fruit',     price: 200, unit: 'kg',        desc: 'Crisp and naturally sweet. Great for snacking.' },
-      { id: 4, name: 'Free-Range Eggs', category: 'Eggs',      price: 480, unit: 'tray (30)', desc: 'Rich golden yolks, superior flavour.' },
-      { id: 5, name: 'Watermelon',      category: 'Fruit',     price: 150, unit: 'piece',     desc: 'Jumbo, juicy, and sweet.' },
-      { id: 6, name: 'Fresh Carrots',   category: 'Vegetable', price: 60,  unit: 'kg',        desc: 'Naturally sweet and crunchy.' },
-    ];
+  // Firebase refs
+  const productsRef = collection(db, 'products');
+  const ordersRef   = collection(db, 'orders');
 
-    const defaultOrders = [
-      { id: 1, customer: 'Jane Wanjiru',  phone: '0712345678', product: 'Roma Tomatoes',   qty: 2, amount: 160,  status: 'done' },
-      { id: 2, customer: 'Peter Ochieng', phone: '0723456789', product: 'Free-Range Eggs', qty: 1, amount: 480,  status: 'done' },
-      { id: 3, customer: 'Mary Akinyi',   phone: '0734567890', product: 'Sweet Apples',    qty: 3, amount: 600,  status: 'pending' },
-      { id: 4, customer: 'James Mutua',   phone: '0745678901', product: 'Watermelon',      qty: 2, amount: 300,  status: 'pending' },
-      { id: 5, customer: 'Alice Chebet',  phone: '0756789012', product: 'Fresh Spinach',   qty: 5, amount: 250,  status: 'pending' },
-      { id: 6, customer: 'Brian Otieno',  phone: '0767890123', product: 'Fresh Carrots',   qty: 4, amount: 240,  status: 'canceled' },
-      { id: 7, customer: 'Grace Mwangi',  phone: '0778901234', product: 'Roma Tomatoes',   qty: 3, amount: 240,  status: 'done' },
-    ];
+  // State
+  window._products = [];
+  window._orders   = [];
 
-    const defaultHero = {
-      line1: 'Fresh From Our', line2: 'Farm',
-      sub: 'Hand-picked vegetables, sun-ripened fruits, and farm-fresh eggs — delivered straight from our fields to your family.',
-      badge: '🌱 100% Naturally Grown',
-      stat1num: '50+', stat1lbl: 'Products',
-      stat2num: '10 yrs', stat2lbl: 'Experience',
-      stat3num: '500+', stat3lbl: 'Happy Families',
-    };
+  // ── REALTIME LISTENERS ──────────────────────────────
+  onSnapshot(productsRef, snap => {
+    window._products = snap.docs.map(d => ({ _id: d.id, ...d.data() }));
+    renderProducts();
+    updateStats();
+  });
 
-    // ── State ───────────────────────────────────────
-    let products = JSON.parse(localStorage.getItem('grf_products') || 'null') || defaultProducts;
-    let orders   = JSON.parse(localStorage.getItem('grf_orders')   || 'null') || defaultOrders;
-    let hero     = JSON.parse(localStorage.getItem('grf_hero')     || 'null') || defaultHero;
+  onSnapshot(ordersRef, snap => {
+    window._orders = snap.docs.map(d => ({ _id: d.id, ...d.data() }));
+    renderOrders();
+    renderOverviewOrders();
+    renderSales();
+    updateStats();
+  });
 
-    // ── Login ───────────────────────────────────────
-    function doLogin() {
-      const u = document.getElementById('username').value.trim();
-      const p = document.getElementById('password').value;
-      if (u === ADMIN_USER && p === ADMIN_PASS) {
-        document.getElementById('login-screen').style.display = 'none';
-        document.getElementById('dashboard').style.display = 'block';
-        document.getElementById('menu-toggle').style.display = '';
-        initDashboard();
-      } else {
-        document.getElementById('login-error').style.display = 'block';
-      }
-    }
-
-    function doLogout() {
-      document.getElementById('login-screen').style.display = 'flex';
-      document.getElementById('dashboard').style.display = 'none';
-      document.getElementById('password').value = '';
-    }
-
-    // ── Sidebar ─────────────────────────────────────
-    function toggleSidebar() {
-      document.getElementById('sidebar').classList.toggle('open');
-    }
-
-    // ── Panel switching ──────────────────────────────
-    const panelMeta = {
-      overview: { title: 'Overview',   sub: "Welcome back! Here's what's happening on your farm." },
-      products: { title: 'Products',   sub: 'Add, edit or remove items from your store.' },
-      orders:   { title: 'Orders',     sub: 'Track and manage incoming customer orders.' },
-      sales:    { title: 'Sales',      sub: 'Your revenue and sales breakdown.' },
-      hero:     { title: 'Hero Text',  sub: 'Edit the headline and stats shown on your homepage.' },
-    };
-
-    function showPanel(name) {
-      document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-      document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-      document.getElementById('panel-' + name).classList.add('active');
-      event.currentTarget.classList.add('active');
-      document.getElementById('panel-title').textContent = panelMeta[name].title;
-      document.getElementById('panel-sub').textContent   = panelMeta[name].sub;
-      if (window.innerWidth <= 768) document.getElementById('sidebar').classList.remove('open');
-    }
-
-    // ── Init ─────────────────────────────────────────
-    function initDashboard() {
-      renderOverview();
-      renderProducts();
-      renderOrders();
-      renderSales();
-      loadHeroFields();
-    }
-
-    // ── Overview ─────────────────────────────────────
-    function renderOverview() {
-      const pending  = orders.filter(o => o.status === 'pending').length;
-      const done     = orders.filter(o => o.status === 'done').length;
-      const canceled = orders.filter(o => o.status === 'canceled').length;
-      document.getElementById('stat-products').textContent = products.length;
-      document.getElementById('stat-pending').textContent  = pending;
-      document.getElementById('stat-done').textContent     = done;
-      document.getElementById('stat-canceled').textContent = canceled;
-
-      const recent = orders.slice(-5).reverse();
-      document.getElementById('overview-orders-body').innerHTML = recent.map(o => `
-        <tr>
-          <td>${o.customer}</td>
-          <td>${o.product}</td>
-          <td>KSh ${o.amount}</td>
-          <td><span class="status-badge status-${o.status}">${o.status}</span></td>
-        </tr>
-      `).join('');
-    }
-
-    // ── Products ─────────────────────────────────────
-    function renderProducts() {
-      document.getElementById('product-list').innerHTML = products.map((p, i) => `
-        <div class="product-item" id="prod-item-${i}">
-          <div class="product-item-header" onclick="toggleProduct(${i})">
-            <div class="prod-title">
-              ${p.name} <span class="prod-badge">${p.category}</span>
-            </div>
-            <div style="display:flex;align-items:center;gap:.8rem;">
-              <span style="font-size:.9rem;font-weight:700;color:var(--green-mid)">KSh ${p.price}/${p.unit}</span>
-              <span class="toggle-icon">▼</span>
-            </div>
-          </div>
-          <div class="product-item-body">
-            <div class="form-row">
-              <div>
-                <label>Product Name</label>
-                <input type="text" value="${p.name}" onchange="products[${i}].name=this.value" />
-              </div>
-              <div>
-                <label>Category</label>
-                <select onchange="products[${i}].category=this.value">
-                  <option ${p.category==='Vegetable'?'selected':''}>Vegetable</option>
-                  <option ${p.category==='Fruit'?'selected':''}>Fruit</option>
-                  <option ${p.category==='Eggs'?'selected':''}>Eggs</option>
-                  <option ${p.category==='Other'?'selected':''}>Other</option>
-                </select>
-              </div>
-            </div>
-            <div class="form-row">
-              <div>
-                <label>Price (KSh)</label>
-                <input type="number" value="${p.price}" onchange="products[${i}].price=+this.value" />
-              </div>
-              <div>
-                <label>Unit</label>
-                <input type="text" value="${p.unit}" onchange="products[${i}].unit=this.value" />
-              </div>
-            </div>
-            <label>Description</label>
-            <textarea onchange="products[${i}].desc=this.value">${p.desc}</textarea>
-            <button class="action-btn danger" onclick="deleteProduct(${i})">🗑️ Delete Product</button>
-          </div>
-        </div>
-      `).join('');
-    }
-
-    function toggleProduct(i) {
-      document.getElementById('prod-item-' + i).classList.toggle('open');
-    }
-
-    function addProduct() {
-      products.push({ id: Date.now(), name: 'New Product', category: 'Vegetable', price: 0, unit: 'kg', desc: '' });
-      renderProducts();
-      saveData();
-      showToast('New product added!');
-    }
-
-    function deleteProduct(i) {
-      if (!confirm('Delete "' + products[i].name + '"?')) return;
-      products.splice(i, 1);
-      renderProducts();
-      saveData();
-      showToast('Product deleted');
-    }
-
-    // ── Orders ───────────────────────────────────────
-    function renderOrders() {
-      document.getElementById('all-orders-body').innerHTML = orders.map((o, i) => `
-        <tr>
-          <td>${o.customer}</td>
-          <td>${o.phone}</td>
-          <td>${o.product}</td>
-          <td>${o.qty}</td>
-          <td>KSh ${o.amount}</td>
-          <td><span class="status-badge status-${o.status}">${o.status}</span></td>
-          <td style="display:flex;gap:.4rem;flex-wrap:wrap;">
-            <button class="action-btn" onclick="setOrderStatus(${i},'done')">✅</button>
-            <button class="action-btn" onclick="setOrderStatus(${i},'pending')">⏳</button>
-            <button class="action-btn danger" onclick="setOrderStatus(${i},'canceled')">❌</button>
-          </td>
-        </tr>
-      `).join('');
-    }
-
-    function setOrderStatus(i, status) {
-      orders[i].status = status;
-      renderOrders();
-      renderOverview();
-      renderSales();
-      saveData();
-      showToast('Order updated to ' + status);
-    }
-
-    // ── Sales ────────────────────────────────────────
-    function renderSales() {
-      const done = orders.filter(o => o.status === 'done');
-      const total = done.reduce((s, o) => s + o.amount, 0);
-      const avg   = done.length ? Math.round(total / done.length) : 0;
-
-      document.getElementById('total-revenue').textContent = 'KSh ' + total;
-      document.getElementById('week-revenue').textContent  = 'KSh ' + Math.round(total * .4);
-      document.getElementById('avg-order').textContent     = 'KSh ' + avg;
-
-      const byProduct = {};
-      done.forEach(o => {
-        if (!byProduct[o.product]) byProduct[o.product] = { units: 0, revenue: 0 };
-        byProduct[o.product].units   += o.qty;
-        byProduct[o.product].revenue += o.amount;
+  // Load hero
+  async function loadHero() {
+    try {
+      const snap = await getDocs(collection(db, 'settings'));
+      snap.forEach(d => {
+        if (d.id === 'hero') {
+          const h = d.data();
+          document.getElementById('hero-badge').value  = h.badge    || '';
+          document.getElementById('hero-line1').value  = h.line1    || '';
+          document.getElementById('hero-line2').value  = h.line2    || '';
+          document.getElementById('hero-sub').value    = h.sub      || '';
+          document.getElementById('stat1-num').value   = h.stat1num || '';
+          document.getElementById('stat1-lbl').value   = h.stat1lbl || '';
+          document.getElementById('stat2-num').value   = h.stat2num || '';
+          document.getElementById('stat2-lbl').value   = h.stat2lbl || '';
+          document.getElementById('stat3-num').value   = h.stat3num || '';
+          document.getElementById('stat3-lbl').value   = h.stat3lbl || '';
+        }
       });
+    } catch(e) { console.warn('Hero load:', e); }
+  }
 
-      document.getElementById('sales-body').innerHTML = Object.entries(byProduct)
-        .sort((a, b) => b[1].revenue - a[1].revenue)
-        .map(([name, d]) => `
-          <tr>
-            <td>${name}</td>
-            <td>${d.units}</td>
-            <td>KSh ${d.revenue}</td>
-          </tr>
-        `).join('') || '<tr><td colspan="3" style="text-align:center;color:var(--text-muted);padding:2rem">No completed orders yet</td></tr>';
-    }
+  // Badge
+  document.getElementById('fb-badge').className = 'firebase-badge connected';
+  document.getElementById('fb-badge').textContent = '🔥 Firebase Connected';
 
-    // ── Hero ─────────────────────────────────────────
-    function loadHeroFields() {
-      document.getElementById('hero-line1').value  = hero.line1;
-      document.getElementById('hero-line2').value  = hero.line2;
-      document.getElementById('hero-sub').value    = hero.sub;
-      document.getElementById('hero-badge').value  = hero.badge;
-      document.getElementById('stat1-num').value   = hero.stat1num;
-      document.getElementById('stat1-lbl').value   = hero.stat1lbl;
-      document.getElementById('stat2-num').value   = hero.stat2num;
-      document.getElementById('stat2-lbl').value   = hero.stat2lbl;
-      document.getElementById('stat3-num').value   = hero.stat3num;
-      document.getElementById('stat3-lbl').value   = hero.stat3lbl;
-    }
+  // ── RENDER PRODUCTS ─────────────────────────────────
+  window.renderProducts = function() {
+    const list = window._products;
+    document.getElementById('product-list').innerHTML = list.length ? list.map((p, i) => `
+      <div class="product-item" id="prod-item-${i}">
+        <div class="product-item-header" onclick="toggleProduct(${i})">
+          <div class="prod-title">${p.name} <span class="prod-badge">${p.category||'Fresh'}</span></div>
+          <div style="display:flex;align-items:center;gap:.8rem;">
+            <span style="font-size:.9rem;font-weight:700;color:var(--green-mid)">KSh ${p.price}/${p.unit}</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+        </div>
+        <div class="product-item-body">
+          <div class="form-row">
+            <div><label>Name</label><input type="text" value="${p.name||''}" onchange="window._products[${i}].name=this.value" /></div>
+            <div><label>Category</label>
+              <select onchange="window._products[${i}].category=this.value">
+                <option ${p.category==='Vegetable'?'selected':''}>Vegetable</option>
+                <option ${p.category==='Fruit'?'selected':''}>Fruit</option>
+                <option ${p.category==='Eggs'?'selected':''}>Eggs</option>
+                <option ${p.category==='Other'?'selected':''}>Other</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div><label>Price (KSh)</label><input type="number" value="${p.price||0}" onchange="window._products[${i}].price=+this.value" /></div>
+            <div><label>Unit</label><input type="text" value="${p.unit||''}" onchange="window._products[${i}].unit=this.value" /></div>
+          </div>
+          <label>Description</label>
+          <textarea onchange="window._products[${i}].desc=this.value">${p.desc||''}</textarea>
+          <label>Image URL</label>
+          <input type="url" value="${p.image||''}" placeholder="https://images.unsplash.com/..." onchange="window._products[${i}].image=this.value" />
+          <div style="display:flex;gap:.7rem;flex-wrap:wrap;">
+            <button class="save-all-btn" style="font-size:.82rem;padding:.5rem 1.1rem;" onclick="saveProduct(${i})">💾 Save</button>
+            <button class="action-btn danger" onclick="deleteProduct('${p._id}','${p.name}')">🗑️ Delete</button>
+          </div>
+        </div>
+      </div>
+    `).join('') : '<p style="color:var(--text-muted);padding:1rem">No products yet. Click + Add Product.</p>';
+  };
 
-    function readHeroFields() {
-      hero = {
-        line1:    document.getElementById('hero-line1').value,
-        line2:    document.getElementById('hero-line2').value,
-        sub:      document.getElementById('hero-sub').value,
-        badge:    document.getElementById('hero-badge').value,
-        stat1num: document.getElementById('stat1-num').value,
-        stat1lbl: document.getElementById('stat1-lbl').value,
-        stat2num: document.getElementById('stat2-num').value,
-        stat2lbl: document.getElementById('stat2-lbl').value,
-        stat3num: document.getElementById('stat3-num').value,
-        stat3lbl: document.getElementById('stat3-lbl').value,
-      };
-    }
+  // ── RENDER ORDERS ───────────────────────────────────
+  window.renderOrders = function() {
+    const orders = window._orders;
+    document.getElementById('all-orders-body').innerHTML = orders.length ? orders.map(o => `
+      <tr>
+        <td>${o.customer||'—'}</td>
+        <td>${o.phone||'—'}</td>
+        <td>${o.product||'—'}</td>
+        <td>${o.qty||'—'}</td>
+        <td>KSh ${o.amount||0}</td>
+        <td><span class="status-badge status-${o.status||'pending'}">${o.status||'pending'}</span></td>
+        <td style="display:flex;gap:.4rem;flex-wrap:wrap;">
+          <button class="action-btn" onclick="setStatus('${o._id}','done')" title="Mark Done">✅</button>
+          <button class="action-btn" onclick="setStatus('${o._id}','pending')" title="Mark Pending">⏳</button>
+          <button class="action-btn danger" onclick="setStatus('${o._id}','canceled')" title="Cancel">❌</button>
+          <button class="action-btn danger" onclick="deleteOrder('${o._id}')">🗑️</button>
+        </td>
+      </tr>
+    `).join('') : '<tr><td colspan="7" style="text-align:center;padding:2rem;color:var(--text-muted)">No orders yet</td></tr>';
+  };
 
-    // ── Save ─────────────────────────────────────────
-    function saveData() {
-      localStorage.setItem('grf_products', JSON.stringify(products));
-      localStorage.setItem('grf_orders',   JSON.stringify(orders));
-      localStorage.setItem('grf_hero',     JSON.stringify(hero));
-    }
+  window.renderOverviewOrders = function() {
+    const recent = [...window._orders].slice(-5).reverse();
+    document.getElementById('overview-orders-body').innerHTML = recent.length ? recent.map(o => `
+      <tr>
+        <td>${o.customer||'—'}</td>
+        <td>${o.product||'—'}</td>
+        <td>KSh ${o.amount||0}</td>
+        <td><span class="status-badge status-${o.status||'pending'}">${o.status||'pending'}</span></td>
+      </tr>
+    `).join('') : '<tr><td colspan="4" style="text-align:center;padding:2rem;color:var(--text-muted)">No orders yet</td></tr>';
+  };
 
-    function saveAll() {
-      readHeroFields();
-      saveData();
-      renderOverview();
-      renderProducts();
-      renderSales();
-      showToast('All changes saved! ✅');
-    }
+  // ── RENDER SALES ────────────────────────────────────
+  window.renderSales = function() {
+    const done    = window._orders.filter(o => o.status === 'done');
+    const pending = window._orders.filter(o => o.status === 'pending');
+    const total   = done.reduce((s,o) => s + (o.amount||0), 0);
+    const pendVal = pending.reduce((s,o) => s + (o.amount||0), 0);
+    const avg     = done.length ? Math.round(total/done.length) : 0;
+    document.getElementById('total-revenue').textContent   = 'KSh ' + total;
+    document.getElementById('pending-revenue').textContent = 'KSh ' + pendVal;
+    document.getElementById('avg-order').textContent       = 'KSh ' + avg;
 
-    // ── Toast ────────────────────────────────────────
-    function showToast(msg) {
-      const t = document.getElementById('toast');
-      t.textContent = '✅ ' + msg;
-      t.classList.add('show');
-      setTimeout(() => t.classList.remove('show'), 2500);
+    const byProd = {};
+    done.forEach(o => {
+      if (!byProd[o.product]) byProd[o.product] = { units:0, revenue:0 };
+      byProd[o.product].units   += o.qty||1;
+      byProd[o.product].revenue += o.amount||0;
+    });
+    document.getElementById('sales-body').innerHTML = Object.entries(byProd).length
+      ? Object.entries(byProd).sort((a,b)=>b[1].revenue-a[1].revenue).map(([name,d])=>`
+          <tr><td>${name}</td><td>${d.units}</td><td>KSh ${d.revenue}</td></tr>
+        `).join('')
+      : '<tr><td colspan="3" style="text-align:center;padding:2rem;color:var(--text-muted)">No completed orders yet</td></tr>';
+  };
+
+  // ── UPDATE STATS ────────────────────────────────────
+  window.updateStats = function() {
+    document.getElementById('stat-products').textContent = window._products.length;
+    document.getElementById('stat-pending').textContent  = window._orders.filter(o=>o.status==='pending').length;
+    document.getElementById('stat-done').textContent     = window._orders.filter(o=>o.status==='done').length;
+    document.getElementById('stat-canceled').textContent = window._orders.filter(o=>o.status==='canceled').length;
+  };
+
+  // ── ACTIONS ─────────────────────────────────────────
+  window.toggleProduct = i => document.getElementById('prod-item-'+i).classList.toggle('open');
+
+  window.saveProduct = async function(i) {
+    const p = window._products[i];
+    try {
+      const { _id, ...data } = p;
+      await updateDoc(doc(db,'products',_id), data);
+      showToast('✅ ' + p.name + ' saved!');
+    } catch(e) { showToast('❌ Save failed: '+e.message, true); }
+  };
+
+  window.addProduct = async function() {
+    try {
+      await addDoc(productsRef, { name:'New Product', category:'Vegetable', price:0, unit:'kg', desc:'', image:'' });
+      showToast('✅ New product added!');
+    } catch(e) { showToast('❌ Error: '+e.message, true); }
+  };
+
+  window.deleteProduct = async function(id, name) {
+    if (!confirm('Delete "'+name+'"?')) return;
+    try {
+      await deleteDoc(doc(db,'products',id));
+      showToast('🗑️ Product deleted');
+    } catch(e) { showToast('❌ Error: '+e.message, true); }
+  };
+
+  window.addOrder = async function() {
+    const o = {
+      customer: document.getElementById('new-customer').value.trim(),
+      phone:    document.getElementById('new-phone').value.trim(),
+      product:  document.getElementById('new-product').value.trim(),
+      qty:      +document.getElementById('new-qty').value,
+      amount:   +document.getElementById('new-amount').value,
+      status:   document.getElementById('new-status').value,
+      createdAt: new Date().toISOString()
+    };
+    if (!o.customer || !o.product) { showToast('❌ Customer and product are required', true); return; }
+    try {
+      await addDoc(ordersRef, o);
+      ['new-customer','new-phone','new-product','new-qty','new-amount'].forEach(id=>document.getElementById(id).value='');
+      showToast('✅ Order added!');
+    } catch(e) { showToast('❌ Error: '+e.message, true); }
+  };
+
+  window.setStatus = async function(id, status) {
+    try {
+      await updateDoc(doc(db,'orders',id), { status });
+      showToast('✅ Order updated to ' + status);
+    } catch(e) { showToast('❌ Error: '+e.message, true); }
+  };
+
+  window.deleteOrder = async function(id) {
+    if (!confirm('Delete this order?')) return;
+    try {
+      await deleteDoc(doc(db,'orders',id));
+      showToast('🗑️ Order deleted');
+    } catch(e) { showToast('❌ Error: '+e.message, true); }
+  };
+
+  // ── SAVE HERO ────────────────────────────────────────
+  window.saveHero = async function() {
+    const hero = {
+      badge:    document.getElementById('hero-badge').value,
+      line1:    document.getElementById('hero-line1').value,
+      line2:    document.getElementById('hero-line2').value,
+      sub:      document.getElementById('hero-sub').value,
+      stat1num: document.getElementById('stat1-num').value,
+      stat1lbl: document.getElementById('stat1-lbl').value,
+      stat2num: document.getElementById('stat2-num').value,
+      stat2lbl: document.getElementById('stat2-lbl').value,
+      stat3num: document.getElementById('stat3-num').value,
+      stat3lbl: document.getElementById('stat3-lbl').value,
+    };
+    try {
+      await setDoc(doc(db,'settings','hero'), hero);
+      showToast('✅ Hero text updated on live site!');
+    } catch(e) { showToast('❌ Error: '+e.message, true); }
+  };
+
+  window._loadHero = loadHero;
+</script>
+
+<script>
+  // ── LOGIN ────────────────────────────────────────────
+  function doLogin() {
+    const u = document.getElementById('username').value.trim();
+    const p = document.getElementById('password').value;
+    if (u === window.ADMIN_USER && p === window.ADMIN_PASS) {
+      document.getElementById('login-screen').style.display = 'none';
+      document.getElementById('dashboard').style.display = 'block';
+      document.getElementById('menu-toggle').style.display = 'block';
+      if (window._loadHero) window._loadHero();
+    } else {
+      document.getElementById('login-error').style.display = 'block';
     }
-  </script>
+  }
+
+  function doLogout() {
+    document.getElementById('login-screen').style.display = 'flex';
+    document.getElementById('dashboard').style.display = 'none';
+    document.getElementById('menu-toggle').style.display = 'none';
+    document.getElementById('password').value = '';
+  }
+
+  function toggleSidebar() { document.getElementById('sidebar').classList.toggle('open'); }
+
+  // ── PANELS ───────────────────────────────────────────
+  const meta = {
+    overview: { title:'Overview',  sub:"Welcome back! Here's what's happening on your farm." },
+    products: { title:'Products',  sub:'Add, edit or remove items from your store.' },
+    orders:   { title:'Orders',    sub:'Track and manage incoming customer orders.' },
+    sales:    { title:'Sales',     sub:'Your revenue and sales breakdown.' },
+    hero:     { title:'Hero Text', sub:'Changes go live on your website instantly.' },
+  };
+
+  function showPanel(name, el) {
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+    document.getElementById('panel-'+name).classList.add('active');
+    if (el) el.classList.add('active');
+    document.getElementById('panel-title').textContent = meta[name].title;
+    document.getElementById('panel-sub').textContent   = meta[name].sub;
+    if (window.innerWidth <= 768) document.getElementById('sidebar').classList.remove('open');
+    window._currentPanel = name;
+  }
+  window._currentPanel = 'overview';
+
+  // ── SAVE CURRENT PANEL ───────────────────────────────
+  function saveCurrentPanel() {
+    if (window._currentPanel === 'hero') {
+      window.saveHero && window.saveHero();
+    } else {
+      showToast('💡 Use the Save button on each product, or use the ✅ buttons on orders.');
+    }
+  }
+
+  // ── TOAST ────────────────────────────────────────────
+  function showToast(msg, isError) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.className = 'toast show' + (isError ? ' error' : '');
+    clearTimeout(window._toastTimer);
+    window._toastTimer = setTimeout(() => t.classList.remove('show'), 3000);
+  }
+  window.showToast = showToast;
+</script>
 </body>
 </html>
