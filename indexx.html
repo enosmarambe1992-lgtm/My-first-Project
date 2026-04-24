@@ -404,6 +404,89 @@
       color: rgba(255,255,255,.5);
     }
 
+    /* ── Pay Button & Modal ────────────────────────────── */
+    .pay-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: .45rem;
+      background: var(--amber);
+      color: var(--brown);
+      font-size: .82rem;
+      font-weight: 700;
+      padding: .52rem 0;
+      border-radius: 50px;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+      margin-top: .6rem;
+      transition: background var(--transition), transform var(--transition);
+    }
+    .pay-btn:hover { background: #d4931f; transform: scale(1.03); }
+
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.55);
+      backdrop-filter: blur(4px);
+      z-index: 999;
+      align-items: center;
+      justify-content: center;
+    }
+    .modal-overlay.active { display: flex; }
+    .modal {
+      background: #fff;
+      border-radius: 20px;
+      padding: 2.8rem 2.4rem 2.2rem;
+      max-width: 360px;
+      width: 90%;
+      text-align: center;
+      box-shadow: 0 24px 60px rgba(0,0,0,.22);
+      animation: popIn .3s ease;
+    }
+    @keyframes popIn {
+      from { opacity: 0; transform: scale(.88); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+    .modal-icon { font-size: 3.4rem; margin-bottom: .8rem; }
+    .modal-badge {
+      display: inline-block;
+      background: var(--amber-light);
+      color: var(--brown);
+      font-size: .74rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      padding: .3rem 1rem;
+      border-radius: 50px;
+      margin-bottom: 1.1rem;
+    }
+    .modal h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      color: var(--green-deep);
+      margin-bottom: .6rem;
+    }
+    .modal p {
+      font-size: .95rem;
+      color: var(--text-mid);
+      line-height: 1.65;
+      margin-bottom: 1.6rem;
+    }
+    .modal-close {
+      background: var(--green-mid);
+      color: #fff;
+      border: none;
+      border-radius: 50px;
+      padding: .72rem 2.2rem;
+      font-size: .95rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background var(--transition);
+    }
+    .modal-close:hover { background: var(--green-deep); }
+
     /* ── Animations ────────────────────────────────────── */
     @keyframes fadeDown {
       from { opacity: 0; transform: translateY(-18px); }
@@ -536,6 +619,7 @@
             <div class="price">KSh 80 <span>/ kg</span></div>
             <a href="#contact" class="order-btn">Order Now</a>
           </div>
+          <button class="pay-btn" onclick="openPayModal()">💳 Pay Now</button>
         </div>
       </div>
 
@@ -552,6 +636,7 @@
             <div class="price">KSh 50 <span>/ bunch</span></div>
             <a href="#contact" class="order-btn">Order Now</a>
           </div>
+          <button class="pay-btn" onclick="openPayModal()">💳 Pay Now</button>
         </div>
       </div>
 
@@ -568,6 +653,7 @@
             <div class="price">KSh 200 <span>/ kg</span></div>
             <a href="#contact" class="order-btn">Order Now</a>
           </div>
+          <button class="pay-btn" onclick="openPayModal()">💳 Pay Now</button>
         </div>
       </div>
 
@@ -584,6 +670,7 @@
             <div class="price">KSh 480 <span>/ tray (30)</span></div>
             <a href="#contact" class="order-btn">Order Now</a>
           </div>
+          <button class="pay-btn" onclick="openPayModal()">💳 Pay Now</button>
         </div>
       </div>
 
@@ -600,6 +687,7 @@
             <div class="price">KSh 150 <span>/ piece</span></div>
             <a href="#contact" class="order-btn">Order Now</a>
           </div>
+          <button class="pay-btn" onclick="openPayModal()">💳 Pay Now</button>
         </div>
       </div>
 
@@ -616,6 +704,7 @@
             <div class="price">KSh 60 <span>/ kg</span></div>
             <a href="#contact" class="order-btn">Order Now</a>
           </div>
+          <button class="pay-btn" onclick="openPayModal()">💳 Pay Now</button>
         </div>
       </div>
 
@@ -636,7 +725,7 @@
         <div class="contact-icon">📞</div>
         <div>
           <h4>Phone</h4>
-          <a href="tel:+254712345678">+254 702 148 896</a>
+          <a href="tel:+254702148896">+254 702 148 896</a>
         </div>
       </div>
 
@@ -644,7 +733,7 @@
         <div class="contact-icon">📍</div>
         <div>
           <h4>Location</h4>
-          <p>Kakamega Mumias Road, Kakamega, Kenya</p>
+          <p>Mumias Road, Kakamega, Kenya</p>
         </div>
       </div>
 
@@ -672,13 +761,43 @@
     <p>Made with 💚 in Kenya</p>
   </footer>
 
-  <!-- ── Hamburger script (no framework, inline) ─────── -->
+  <!-- ── Coming Soon Payment Modal ──────────────────── -->
+  <div class="modal-overlay" id="payModal">
+    <div class="modal">
+      <div class="modal-icon">🔒</div>
+      <div class="modal-badge">⏳ Coming Soon</div>
+      <h3>Online Payment</h3>
+      <p>We're working on bringing you a seamless <strong>M-Pesa STK Push</strong> payment experience. In the meantime, please order via WhatsApp or call us directly — we're happy to help!</p>
+      <button class="modal-close" onclick="closePayModal()">Got it, thanks!</button>
+    </div>
+  </div>
+
+  <!-- ── Scripts ──────────────────────────────────────── -->
   <script>
+    // Nav hamburger
     const btn = document.getElementById('hamburger');
     const links = document.getElementById('nav-links');
     btn.addEventListener('click', () => links.classList.toggle('open'));
     links.querySelectorAll('a').forEach(a => {
       a.addEventListener('click', () => links.classList.remove('open'));
+    });
+
+    // Pay modal
+    function openPayModal() {
+      document.getElementById('payModal').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+    function closePayModal() {
+      document.getElementById('payModal').classList.remove('active');
+      document.body.style.overflow = '';
+    }
+    // Close on overlay click
+    document.getElementById('payModal').addEventListener('click', function(e) {
+      if (e.target === this) closePayModal();
+    });
+    // Close on Escape key
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closePayModal();
     });
   </script>
 
