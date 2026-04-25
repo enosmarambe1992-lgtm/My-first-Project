@@ -99,6 +99,15 @@
     .card-img img { height: 100%; object-fit: cover; transition: transform .5s ease; }
     .card:hover .card-img img { transform: scale(1.07); }
     .card-badge { position: absolute; top: 12px; left: 12px; background: var(--green-soft); color: #fff; font-size: .72rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: .28rem .75rem; border-radius: 50px; }
+    .badge-vegetable    { background: #52b788; }
+    .badge-fruit        { background: #e9a827; color: #6b4226; }
+    .badge-eggs         { background: #f4a261; color: #fff; }
+    .badge-tubers       { background: #a0522d; }
+    .badge-nuts         { background: #8b6914; }
+    .badge-oilseeds     { background: #c9a84c; color: #3a2a00; }
+    .badge-fibre        { background: #6c757d; }
+    .badge-grains       { background: #d4a017; color: #3a2a00; }
+    .badge-other        { background: #6b8f71; }
     .card-body { padding: 1.2rem 1.4rem 1.4rem; }
     .card-body h3 { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 700; color: var(--green-deep); margin-bottom: .35rem; }
     .card-body p { font-size: .88rem; color: var(--text-muted); margin-bottom: 1rem; }
@@ -282,6 +291,17 @@
       { name:'Fresh Carrots',   category:'Vegetable', price:60,  unit:'kg',        desc:'Naturally sweet and crunchy.',                   image:'https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?w=600&auto=format&fit=crop' },
     ];
 
+    function badgeClass(cat) {
+      const map = {
+        'Vegetable': 'badge-vegetable', 'Fruit': 'badge-fruit',
+        'Eggs': 'badge-eggs', 'Tubers': 'badge-tubers',
+        'Nuts': 'badge-nuts', 'Oilseeds': 'badge-oilseeds',
+        'Fibre Crops': 'badge-fibre', 'Grains & Cereals': 'badge-grains',
+        'Other': 'badge-other'
+      };
+      return map[cat] || 'badge-vegetable';
+    }
+
     function renderProducts(list) {
       const grid = document.getElementById('products-grid');
       if (!list.length) { grid.innerHTML = '<p style="color:var(--text-muted)">No products available right now.</p>'; return; }
@@ -289,7 +309,7 @@
         <div class="card">
           <div class="card-img">
             <img src="${p.image || 'https://images.unsplash.com/photo-1500651230702-0e2d8a49d4ad?w=600&auto=format&fit=crop'}" alt="${p.name}" loading="lazy" />
-            <span class="card-badge">${p.category || 'Fresh'}</span>
+            <span class="card-badge ${badgeClass(p.category)}">${p.category || 'Fresh'}</span>
           </div>
           <div class="card-body">
             <h3>${p.name}</h3>
