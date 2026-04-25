@@ -3,401 +3,328 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>E &M Fresh Harvests – Fresh From Our Land</title>
+  <title>E &M Fresh Harvests – Farm Fresh Produce</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
-
   <style>
     :root {
-      --green-deep:   #1a3d2b;
-      --green-mid:    #2d6a4f;
-      --green-soft:   #52b788;
-      --green-light:  #b7e4c7;
-      --green-pale:   #f0faf4;
-      --amber:        #e9a827;
-      --amber-light:  #fdf3d8;
-      --brown:        #6b4226;
-      --cream:        #fdfaf5;
-      --text-dark:    #1c2b1e;
-      --text-mid:     #3a5041;
-      --text-muted:   #7a9a82;
-      --radius:       12px;
-      --shadow-sm:    0 2px 8px rgba(26,61,43,.10);
-      --shadow-md:    0 6px 24px rgba(26,61,43,.14);
-      --shadow-lg:    0 16px 48px rgba(26,61,43,.18);
-      --transition:   .3s ease;
+      --green-deep:#1a3d2b;--green-mid:#2d6a4f;--green-soft:#52b788;
+      --green-light:#b7e4c7;--green-pale:#f0faf4;
+      --amber:#e9a827;--amber-light:#fdf3d8;--brown:#6b4226;
+      --red:#c0392b;--cream:#fdfaf5;
+      --text-dark:#1c2b1e;--text-mid:#3a5041;--text-muted:#7a9a82;
+      --border:#d4e8db;--radius:14px;
+      --shadow-sm:0 2px 8px rgba(26,61,43,.10);
+      --shadow-md:0 8px 28px rgba(26,61,43,.15);
+      --shadow-lg:0 20px 60px rgba(26,61,43,.20);
+      --transition:.28s ease;
     }
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body { font-family: 'Lato', sans-serif; background: var(--cream); color: var(--text-dark); line-height: 1.7; }
-    img { display: block; width: 100%; }
-    a { text-decoration: none; color: inherit; }
-
-    /* NAV */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      background: rgba(26,61,43,.95); backdrop-filter: blur(8px);
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0 5%; height: 64px; box-shadow: 0 2px 20px rgba(0,0,0,.2);
-    }
-    .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.45rem; font-weight: 700; color: var(--green-light); display: flex; align-items: center; gap: .5rem; }
-    .nav-links { display: flex; list-style: none; gap: 2.5rem; }
-    .nav-links a { font-size: .93rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--green-light); position: relative; padding-bottom: 3px; transition: color var(--transition); }
-    .nav-links a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background: var(--amber); transition: width var(--transition); }
-    .nav-links a:hover { color: #fff; }
-    .nav-links a:hover::after { width: 100%; }
-    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
-    .hamburger span { display: block; width: 26px; height: 2px; background: var(--green-light); }
-
-    /* HERO */
-    #home {
-      min-height: 100vh; padding-top: 64px;
-      display: grid; place-items: center;
-      background: linear-gradient(160deg, rgba(26,61,43,.72) 0%, rgba(45,106,79,.55) 60%, rgba(82,183,136,.2) 100%),
-        url('https://images.unsplash.com/photo-1500651230702-0e2d8a49d4ad?w=1400&auto=format&fit=crop') center/cover no-repeat;
-      text-align: center; padding-left: 5%; padding-right: 5%;
-    }
-    .hero-inner { max-width: 720px; }
-    .hero-badge { display: inline-block; background: var(--amber); color: var(--brown); font-size: .78rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; padding: .35rem 1.1rem; border-radius: 50px; margin-bottom: 1.6rem; animation: fadeDown .7s ease both; }
-    .hero-inner h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.5rem, 6vw, 4.2rem); font-weight: 900; color: #fff; line-height: 1.13; margin-bottom: 1.2rem; animation: fadeDown .8s .1s ease both; }
-    .hero-inner h1 em { font-style: italic; color: var(--green-light); }
-    .hero-inner p { font-size: 1.1rem; color: rgba(255,255,255,.88); max-width: 520px; margin: 0 auto 2.4rem; font-weight: 300; animation: fadeDown .9s .2s ease both; }
-    .hero-cta { display: inline-flex; align-items: center; gap: .6rem; background: var(--amber); color: var(--brown); font-weight: 700; font-size: 1rem; padding: .85rem 2.2rem; border-radius: 50px; box-shadow: 0 6px 20px rgba(233,168,39,.4); transition: transform var(--transition), box-shadow var(--transition); animation: fadeDown 1s .3s ease both; }
-    .hero-cta:hover { transform: translateY(-3px); box-shadow: 0 10px 28px rgba(233,168,39,.5); }
-    .hero-stats { display: flex; justify-content: center; gap: 3rem; margin-top: 3.5rem; animation: fadeUp 1s .5s ease both; }
-    .stat strong { display: block; font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 900; color: var(--green-light); }
-    .stat span { font-size: .82rem; color: rgba(255,255,255,.7); letter-spacing: .05em; text-transform: uppercase; }
-
-    /* ABOUT STRIP */
-    .about-strip { background: var(--green-deep); padding: 56px 5%; display: flex; align-items: center; justify-content: center; gap: 4rem; flex-wrap: wrap; text-align: center; }
-    .feature { max-width: 220px; }
-    .feature-icon { font-size: 2.4rem; margin-bottom: .7rem; }
-    .feature h3 { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--green-light); margin-bottom: .4rem; }
-    .feature p { font-size: .9rem; color: rgba(255,255,255,.65); font-weight: 300; }
-
-    /* PRODUCTS */
-    #products { padding: 90px 5%; background: var(--green-pale); }
-    .products-header { max-width: 600px; margin-bottom: 3rem; }
-    .section-label { font-size: .78rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; color: var(--green-soft); margin-bottom: .6rem; }
-    .section-title { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 900; color: var(--green-deep); line-height: 1.2; margin-bottom: 1.2rem; }
-    .section-sub { color: var(--text-mid); max-width: 560px; font-size: 1.02rem; }
-    .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 1.6rem; }
-
-    /* Skeleton loader */
-    .skeleton { background: #e8f0eb; border-radius: var(--radius); overflow: hidden; }
-    .skeleton-img { height: 200px; background: linear-gradient(90deg,#e8f0eb 25%,#d4e8db 50%,#e8f0eb 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; }
-    .skeleton-body { padding: 1.2rem 1.4rem; }
-    .skeleton-line { height: 14px; background: linear-gradient(90deg,#e8f0eb 25%,#d4e8db 50%,#e8f0eb 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; border-radius: 4px; margin-bottom: .7rem; }
-    .skeleton-line.short { width: 60%; }
-    @keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
-
-    /* Card */
-    .card { background: #fff; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-sm); transition: transform var(--transition), box-shadow var(--transition); }
-    .card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
-    .card-img { height: 200px; overflow: hidden; position: relative; }
-    .card-img img { height: 100%; object-fit: cover; transition: transform .5s ease; }
-    .card:hover .card-img img { transform: scale(1.07); }
-    .card-badge { position: absolute; top: 12px; left: 12px; background: var(--green-soft); color: #fff; font-size: .72rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: .28rem .75rem; border-radius: 50px; }
-    .badge-vegetable    { background: #52b788; }
-    .badge-fruit        { background: #e9a827; color: #6b4226; }
-    .badge-eggs         { background: #f4a261; color: #fff; }
-    .badge-tubers       { background: #a0522d; }
-    .badge-nuts         { background: #8b6914; }
-    .badge-oilseeds     { background: #c9a84c; color: #3a2a00; }
-    .badge-fibre        { background: #6c757d; }
-    .badge-grains       { background: #d4a017; color: #3a2a00; }
-    .badge-other        { background: #6b8f71; }
-    .card-body { padding: 1.2rem 1.4rem 1.4rem; }
-    .card-body h3 { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 700; color: var(--green-deep); margin-bottom: .35rem; }
-    .card-body p { font-size: .88rem; color: var(--text-muted); margin-bottom: 1rem; }
-    .card-footer { display: flex; align-items: center; justify-content: space-between; }
-    .price { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; color: var(--green-mid); }
-    .price span { font-size: .8rem; color: var(--text-muted); font-family: 'Lato', sans-serif; font-weight: 400; }
-    .order-btn { background: var(--green-mid); color: #fff; font-size: .82rem; font-weight: 700; padding: .5rem 1.1rem; border-radius: 50px; transition: background var(--transition), transform var(--transition); }
-    .order-btn:hover { background: var(--green-deep); transform: scale(1.05); }
-    .pay-btn { display: flex; align-items: center; justify-content: center; gap: .45rem; background: var(--amber); color: var(--brown); font-size: .82rem; font-weight: 700; padding: .52rem 0; border-radius: 50px; border: none; cursor: pointer; width: 100%; margin-top: .6rem; transition: background var(--transition), transform var(--transition); }
-    .pay-btn:hover { background: #d4931f; transform: scale(1.03); }
-
-    /* CONTACT */
-    #contact { padding: 90px 5%; background: var(--cream); display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
-    .contact-visual { border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-lg); height: 420px; }
-    .contact-visual img { height: 100%; object-fit: cover; }
-    .contact-info .section-sub { margin-bottom: 2rem; }
-    .contact-card { display: flex; align-items: flex-start; gap: 1rem; background: var(--green-pale); border: 1px solid var(--green-light); border-radius: var(--radius); padding: 1.2rem 1.4rem; margin-bottom: 1rem; }
-    .contact-icon { font-size: 1.6rem; flex-shrink: 0; margin-top: .1rem; }
-    .contact-card h4 { font-weight: 700; font-size: .85rem; text-transform: uppercase; letter-spacing: .07em; color: var(--text-muted); margin-bottom: .2rem; }
-    .contact-card p, .contact-card a { font-size: 1rem; color: var(--green-deep); font-weight: 700; }
-    .contact-card a:hover { color: var(--green-soft); }
-    .whatsapp-btn { display: inline-flex; align-items: center; gap: .7rem; margin-top: 1.6rem; background: #25d366; color: #fff; font-weight: 700; font-size: 1rem; padding: .9rem 2rem; border-radius: 50px; box-shadow: 0 6px 20px rgba(37,211,102,.35); transition: transform var(--transition), box-shadow var(--transition); }
-    .whatsapp-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 28px rgba(37,211,102,.45); }
-
-    /* MODAL */
-    .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.55); backdrop-filter: blur(4px); z-index: 999; align-items: center; justify-content: center; }
-    .modal-overlay.active { display: flex; }
-    .modal { background: #fff; border-radius: 20px; padding: 2.8rem 2.4rem 2.2rem; max-width: 360px; width: 90%; text-align: center; box-shadow: 0 24px 60px rgba(0,0,0,.22); animation: popIn .3s ease; }
-    @keyframes popIn { from{opacity:0;transform:scale(.88)} to{opacity:1;transform:scale(1)} }
-    .modal-icon { font-size: 3.4rem; margin-bottom: .8rem; }
-    .modal-badge { display: inline-block; background: var(--amber-light); color: var(--brown); font-size: .74rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; padding: .3rem 1rem; border-radius: 50px; margin-bottom: 1.1rem; }
-    .modal h3 { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--green-deep); margin-bottom: .6rem; }
-    .modal p { font-size: .95rem; color: var(--text-mid); line-height: 1.65; margin-bottom: 1.6rem; }
-    .modal-close { background: var(--green-mid); color: #fff; border: none; border-radius: 50px; padding: .72rem 2.2rem; font-size: .95rem; font-weight: 700; cursor: pointer; transition: background var(--transition); }
-    .modal-close:hover { background: var(--green-deep); }
-
-    /* FOOTER */
-    footer { background: var(--green-deep); padding: 40px 5%; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
-    .footer-logo { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; color: var(--green-light); }
-    footer p { font-size: .85rem; color: rgba(255,255,255,.5); }
-
-    /* ANIMATIONS */
-    @keyframes fadeDown { from{opacity:0;transform:translateY(-18px)} to{opacity:1;transform:translateY(0)} }
-    @keyframes fadeUp   { from{opacity:0;transform:translateY(18px)}  to{opacity:1;transform:translateY(0)} }
-
-    /* RESPONSIVE */
-    @media (max-width: 768px) {
-      .nav-links { display: none; flex-direction: column; gap: 0; position: fixed; top: 64px; left: 0; right: 0; background: var(--green-deep); padding: 1rem 0 1.5rem; }
-      .nav-links.open { display: flex; }
-      .nav-links li { text-align: center; }
-      .nav-links a { display: block; padding: .85rem 1.5rem; font-size: 1rem; }
-      .nav-links a::after { display: none; }
-      .hamburger { display: flex; }
-      .hero-stats { gap: 1.8rem; }
-      .stat strong { font-size: 1.5rem; }
-      .about-strip { gap: 2.2rem; }
-      #contact { grid-template-columns: 1fr; gap: 2rem; }
-      .contact-visual { height: 260px; order: -1; }
-      footer { flex-direction: column; text-align: center; }
-    }
-    @media (max-width: 480px) {
-      #products, #contact { padding: 70px 4%; }
-      .hero-stats { flex-direction: column; gap: 1.2rem; }
-    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:'Lato',sans-serif;background:var(--cream);color:var(--text-dark);line-height:1.7}
+    a{text-decoration:none;color:inherit}
+    img{display:block;width:100%}
+    nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(26,61,43,.96);backdrop-filter:blur(10px);display:flex;align-items:center;justify-content:space-between;padding:0 5%;height:66px;box-shadow:0 2px 20px rgba(0,0,0,.18)}
+    .nav-logo{font-family:'Playfair Display',serif;font-size:1.35rem;font-weight:700;color:var(--green-light);display:flex;align-items:center;gap:.5rem}
+    .nav-links{display:flex;list-style:none;gap:2rem;align-items:center}
+    .nav-links a{font-size:.88rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.75);transition:color var(--transition)}
+    .nav-links a:hover{color:#fff}
+    .nav-signin-btn{background:var(--amber);color:var(--brown);font-size:.88rem;font-weight:700;padding:.5rem 1.3rem;border-radius:50px;border:none;cursor:pointer;font-family:'Lato',sans-serif;transition:transform var(--transition),box-shadow var(--transition)}
+    .nav-signin-btn:hover{transform:translateY(-2px);box-shadow:0 4px 14px rgba(233,168,39,.4)}
+    .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
+    .hamburger span{display:block;width:26px;height:2px;background:var(--green-light)}
+    #home{min-height:100vh;padding-top:66px;display:grid;place-items:center;text-align:center;padding-left:5%;padding-right:5%;background:linear-gradient(160deg,rgba(26,61,43,.78) 0%,rgba(45,106,79,.62) 55%,rgba(82,183,136,.25) 100%),url('https://images.unsplash.com/photo-1500651230702-0e2d8a49d4ad?w=1400&auto=format&fit=crop') center/cover no-repeat}
+    .hero-inner{max-width:760px}
+    .hero-badge{display:inline-block;background:var(--amber);color:var(--brown);font-size:.78rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;padding:.35rem 1.2rem;border-radius:50px;margin-bottom:1.6rem;animation:fadeDown .7s ease both}
+    .hero-inner h1{font-family:'Playfair Display',serif;font-size:clamp(2.6rem,6vw,4.4rem);font-weight:900;color:#fff;line-height:1.12;margin-bottom:1.2rem;animation:fadeDown .8s .1s ease both}
+    .hero-inner h1 em{font-style:italic;color:var(--green-light)}
+    .hero-inner>p{font-size:1.12rem;color:rgba(255,255,255,.85);max-width:540px;margin:0 auto 2.6rem;font-weight:300;animation:fadeDown .9s .2s ease both}
+    .hero-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;animation:fadeDown 1s .3s ease both}
+    .btn-primary{display:inline-flex;align-items:center;gap:.6rem;background:var(--amber);color:var(--brown);font-weight:700;font-size:1rem;padding:.88rem 2.2rem;border-radius:50px;box-shadow:0 6px 20px rgba(233,168,39,.4);transition:transform var(--transition),box-shadow var(--transition);border:none;cursor:pointer;font-family:'Lato',sans-serif}
+    .btn-primary:hover{transform:translateY(-3px);box-shadow:0 10px 28px rgba(233,168,39,.5)}
+    .btn-secondary{display:inline-flex;align-items:center;gap:.6rem;background:rgba(255,255,255,.15);color:#fff;font-weight:700;font-size:1rem;padding:.88rem 2.2rem;border-radius:50px;border:2px solid rgba(255,255,255,.4);transition:all var(--transition);cursor:pointer;font-family:'Lato',sans-serif}
+    .btn-secondary:hover{background:rgba(255,255,255,.25);border-color:#fff}
+    .hero-stats{display:flex;justify-content:center;gap:3rem;margin-top:3.8rem;animation:fadeUp 1s .5s ease both}
+    .stat strong{display:block;font-family:'Playfair Display',serif;font-size:2.1rem;font-weight:900;color:var(--green-light)}
+    .stat span{font-size:.8rem;color:rgba(255,255,255,.65);letter-spacing:.06em;text-transform:uppercase}
+    .about-strip{background:var(--green-deep);padding:56px 5%;display:flex;align-items:center;justify-content:center;gap:4rem;flex-wrap:wrap;text-align:center}
+    .feature{max-width:210px}
+    .feature-icon{font-size:2.4rem;margin-bottom:.7rem}
+    .feature h3{font-family:'Playfair Display',serif;font-size:1.08rem;color:var(--green-light);margin-bottom:.35rem}
+    .feature p{font-size:.88rem;color:rgba(255,255,255,.6);font-weight:300}
+    #about{padding:90px 5%;background:var(--cream);display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+    .about-img{border-radius:20px;overflow:hidden;box-shadow:var(--shadow-lg);height:440px}
+    .about-img img{height:100%;object-fit:cover}
+    .section-label{font-size:.78rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--green-soft);margin-bottom:.6rem}
+    .about-text h2{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:900;color:var(--green-deep);line-height:1.2;margin-bottom:1.2rem}
+    .about-text p{color:var(--text-mid);font-size:1rem;margin-bottom:1rem}
+    .about-values{display:flex;flex-direction:column;gap:.7rem;margin-top:1.5rem}
+    .about-value{display:flex;align-items:center;gap:.8rem;font-size:.95rem;color:var(--text-mid)}
+    .about-value span{font-size:1.2rem}
+    #products{padding:90px 5%;background:var(--green-pale)}
+    .section-header{text-align:center;margin-bottom:2.5rem}
+    .section-title{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:900;color:var(--green-deep);line-height:1.2;margin-bottom:.8rem}
+    .section-sub{color:var(--text-mid);font-size:1rem;max-width:520px;margin:0 auto}
+    .filter-bar{display:flex;gap:.6rem;flex-wrap:wrap;justify-content:center;margin-bottom:2.5rem}
+    .filter-chip{padding:.42rem 1.1rem;border-radius:50px;border:1.5px solid var(--border);font-size:.82rem;font-weight:700;cursor:pointer;transition:all var(--transition);background:#fff;color:var(--text-mid)}
+    .filter-chip:hover{border-color:var(--green-soft);color:var(--green-mid)}
+    .filter-chip.active{background:var(--green-mid);color:#fff;border-color:var(--green-mid)}
+    .products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1.5rem}
+    .skeleton{background:#fff;border-radius:var(--radius);overflow:hidden}
+    .skel-img{height:200px;background:linear-gradient(90deg,#e8f0eb 25%,#d4e8db 50%,#e8f0eb 75%);background-size:200% 100%;animation:shimmer 1.5s infinite}
+    .skel-body{padding:1.1rem 1.3rem}
+    .skel-line{height:13px;background:linear-gradient(90deg,#e8f0eb 25%,#d4e8db 50%,#e8f0eb 75%);background-size:200% 100%;animation:shimmer 1.5s infinite;border-radius:4px;margin-bottom:.6rem}
+    .skel-line.short{width:55%}
+    @keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+    .card{background:#fff;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow-sm);transition:transform var(--transition),box-shadow var(--transition);display:flex;flex-direction:column}
+    .card:hover{transform:translateY(-6px);box-shadow:var(--shadow-md)}
+    .card-img{height:200px;overflow:hidden;position:relative}
+    .card-img img{height:100%;object-fit:cover;transition:transform .5s ease}
+    .card:hover .card-img img{transform:scale(1.07)}
+    .card-badge{position:absolute;top:10px;left:10px;font-size:.7rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:.25rem .7rem;border-radius:50px;color:#fff;background:var(--green-soft)}
+    .badge-vegetable{background:#52b788}.badge-fruit{background:#e9a827;color:#6b4226}
+    .badge-eggs{background:#f4a261}.badge-tubers{background:#a0522d}
+    .badge-nuts{background:#8b6914}.badge-oilseeds{background:#c9a84c;color:#3a2a00}
+    .badge-fibre{background:#6c757d}.badge-grains{background:#d4a017;color:#3a2a00}
+    .badge-other{background:#6b8f71}
+    .card-body{padding:1.1rem 1.3rem 1.3rem;flex:1;display:flex;flex-direction:column}
+    .card-body h3{font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--green-deep);margin-bottom:.25rem}
+    .card-body p{font-size:.85rem;color:var(--text-muted);flex:1;margin-bottom:.9rem}
+    .card-footer-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:.7rem}
+    .price{font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:700;color:var(--green-mid)}
+    .price span{font-size:.78rem;font-family:'Lato',sans-serif;font-weight:400;color:var(--text-muted)}
+    .shop-now-btn{background:var(--green-mid);color:#fff;font-size:.82rem;font-weight:700;padding:.48rem 1rem;border-radius:50px;border:none;cursor:pointer;font-family:'Lato',sans-serif;transition:background var(--transition)}
+    .shop-now-btn:hover{background:var(--green-deep)}
+    .add-cart-btn{width:100%;padding:.58rem;background:var(--amber);color:var(--brown);border:none;border-radius:50px;font-size:.88rem;font-weight:700;font-family:'Lato',sans-serif;cursor:pointer;transition:background var(--transition),transform var(--transition);display:flex;align-items:center;justify-content:center;gap:.5rem}
+    .add-cart-btn:hover{background:#d4931f;transform:scale(1.02)}
+    #contact{padding:90px 5%;background:var(--cream);display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+    .contact-visual{border-radius:20px;overflow:hidden;box-shadow:var(--shadow-lg);height:420px}
+    .contact-visual img{height:100%;object-fit:cover}
+    .contact-card{display:flex;align-items:flex-start;gap:1rem;background:var(--green-pale);border:1px solid var(--green-light);border-radius:var(--radius);padding:1.2rem 1.4rem;margin-bottom:1rem}
+    .contact-icon{font-size:1.6rem;flex-shrink:0}
+    .contact-card h4{font-weight:700;font-size:.82rem;text-transform:uppercase;letter-spacing:.07em;color:var(--text-muted);margin-bottom:.2rem}
+    .contact-card p,.contact-card a{font-size:1rem;color:var(--green-deep);font-weight:700}
+    .contact-card a:hover{color:var(--green-soft)}
+    .whatsapp-btn{display:inline-flex;align-items:center;gap:.7rem;margin-top:1.5rem;background:#25d366;color:#fff;font-weight:700;font-size:1rem;padding:.9rem 2rem;border-radius:50px;box-shadow:0 6px 20px rgba(37,211,102,.35);transition:transform var(--transition)}
+    .whatsapp-btn:hover{transform:translateY(-3px)}
+    footer{background:var(--green-deep);padding:40px 5%;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+    .footer-logo{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:var(--green-light)}
+    footer p{font-size:.85rem;color:rgba(255,255,255,.45)}
+    .footer-links{display:flex;gap:1.5rem}
+    .footer-links a{font-size:.85rem;color:rgba(255,255,255,.55);transition:color var(--transition)}
+    .footer-links a:hover{color:#fff}
+    .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);backdrop-filter:blur(6px);z-index:999;align-items:center;justify-content:center;padding:1rem}
+    .modal-overlay.open{display:flex}
+    .auth-modal{background:#fff;border-radius:24px;width:100%;max-width:420px;box-shadow:var(--shadow-lg);animation:popUp .35s ease both;overflow:hidden}
+    .auth-modal-hero{background:linear-gradient(135deg,var(--green-deep),var(--green-mid));padding:2rem;text-align:center;position:relative}
+    .auth-modal-hero span{font-size:2.8rem}
+    .auth-modal-hero h2{font-family:'Playfair Display',serif;font-size:1.5rem;color:#fff;margin-top:.4rem}
+    .auth-modal-hero p{font-size:.88rem;color:rgba(255,255,255,.75);margin-top:.3rem}
+    .close-modal-btn{position:absolute;top:1rem;right:1rem;background:rgba(255,255,255,.2);border:none;color:#fff;border-radius:50%;width:32px;height:32px;font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center}
+    .auth-modal-body{padding:2rem}
+    .auth-tabs{display:flex;background:var(--green-pale);border-radius:50px;padding:4px;margin-bottom:1.6rem}
+    .auth-tab{flex:1;text-align:center;padding:.58rem;border-radius:50px;font-size:.88rem;font-weight:700;cursor:pointer;transition:all var(--transition);color:var(--text-muted)}
+    .auth-tab.active{background:var(--green-mid);color:#fff}
+    .auth-form{display:none}
+    .auth-form.active{display:block}
+    .field{margin-bottom:.9rem}
+    .field label{display:block;font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--text-mid);margin-bottom:.35rem}
+    .field input{width:100%;padding:.78rem 1rem;border:1.5px solid var(--border);border-radius:10px;font-size:.95rem;font-family:'Lato',sans-serif;outline:none;background:var(--green-pale);transition:border-color var(--transition)}
+    .field input:focus{border-color:var(--green-soft);background:#fff}
+    .auth-submit-btn{width:100%;padding:.88rem;background:var(--green-mid);color:#fff;border:none;border-radius:50px;font-size:1rem;font-weight:700;font-family:'Lato',sans-serif;cursor:pointer;transition:background var(--transition),transform var(--transition);margin-top:.4rem}
+    .auth-submit-btn:hover{background:var(--green-deep);transform:translateY(-2px)}
+    .divider{display:flex;align-items:center;gap:.8rem;margin:1rem 0;color:var(--text-muted);font-size:.82rem}
+    .divider::before,.divider::after{content:'';flex:1;height:1px;background:var(--border)}
+    .google-btn{width:100%;padding:.82rem;background:#fff;border:1.5px solid var(--border);border-radius:50px;font-size:.92rem;font-weight:700;font-family:'Lato',sans-serif;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:.7rem;transition:border-color var(--transition),box-shadow var(--transition)}
+    .google-btn:hover{border-color:var(--green-soft);box-shadow:var(--shadow-sm)}
+    .auth-error{color:var(--red);font-size:.83rem;margin-top:.6rem;text-align:center;display:none}
+    .toast{position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%);background:var(--green-deep);color:#fff;padding:.8rem 1.8rem;border-radius:50px;font-weight:700;font-size:.9rem;box-shadow:var(--shadow-md);display:none;align-items:center;gap:.5rem;z-index:9999;white-space:nowrap}
+    .toast.show{display:flex;animation:slideUp .3s ease}
+    @keyframes fadeDown{from{opacity:0;transform:translateY(-18px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes popUp{from{opacity:0;transform:scale(.9)}to{opacity:1;transform:scale(1)}}
+    @keyframes slideUp{from{opacity:0;transform:translateX(-50%) translateY(12px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
+    @media(max-width:900px){#about,#contact{grid-template-columns:1fr;gap:2.5rem}.about-img{height:280px;order:-1}.contact-visual{height:260px;order:-1}}
+    @media(max-width:768px){.nav-links{display:none;flex-direction:column;gap:0;position:fixed;top:66px;left:0;right:0;background:var(--green-deep);padding:1rem 0 1.5rem}.nav-links.open{display:flex}.nav-links li{text-align:center}.nav-links a{display:block;padding:.85rem 1.5rem}.hamburger{display:flex}.hero-stats{gap:1.8rem}footer{flex-direction:column;text-align:center}.footer-links{justify-content:center}}
+    @media(max-width:480px){#products,#about,#contact{padding:60px 4%}.hero-stats{flex-direction:column;gap:1rem}.hero-btns{flex-direction:column;align-items:center}}
   </style>
 </head>
 <body>
-
-  <!-- NAV -->
-  <nav id="navbar">
-    <div class="nav-logo"><span>🌿</span> E &M Fresh Harvests</div>
-    <button class="hamburger" id="hamburger" aria-label="Toggle menu">
-      <span></span><span></span><span></span>
-    </button>
+  <nav>
+    <div class="nav-logo">🌿 E &M Fresh Harvests</div>
+    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
     <ul class="nav-links" id="nav-links">
       <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
       <li><a href="#products">Products</a></li>
       <li><a href="#contact">Contact</a></li>
+      <li><button class="nav-signin-btn" onclick="openAuth()">🛒 Sign In to Shop</button></li>
     </ul>
   </nav>
 
-  <!-- HERO -->
   <section id="home">
     <div class="hero-inner">
-      <div class="hero-badge" id="hero-badge">🌱 100% Naturally Grown</div>
-      <h1 id="hero-heading">Fresh From Our <em id="hero-em">Farm</em><br>To Your Table</h1>
-      <p id="hero-sub">Hand-picked vegetables, sun-ripened fruits, and farm-fresh eggs — delivered straight from our fields to your family.</p>
-      <a href="#products" class="hero-cta">Browse Products ↓</a>
-      <a href="shop.html" class="hero-cta" style="background:#fff;color:var(--green-deep);margin-left:.8rem;box-shadow:0 6px 20px rgba(255,255,255,.2);">🛒 Shop Online</a>
+      <div class="hero-badge">🌱 100% Naturally Grown — Kakamega, Kenya</div>
+      <h1>From Our Fields<br>To Your <em>Table</em></h1>
+      <p>Hand-picked vegetables, grains, nuts and more — grown with care and delivered fresh from our farm in Kakamega.</p>
+      <div class="hero-btns">
+        <button class="btn-primary" onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})">🌿 Browse Products</button>
+        <button class="btn-secondary" onclick="openAuth()">🛒 Sign In to Shop</button>
+      </div>
       <div class="hero-stats">
-        <div class="stat"><strong id="stat1-num">50+</strong><span id="stat1-lbl">Products</span></div>
-        <div class="stat"><strong id="stat2-num">10 yrs</strong><span id="stat2-lbl">Experience</span></div>
-        <div class="stat"><strong id="stat3-num">500+</strong><span id="stat3-lbl">Happy Families</span></div>
+        <div class="stat"><strong>20+</strong><span>Products</span></div>
+        <div class="stat"><strong>100%</strong><span>Natural</span></div>
+        <div class="stat"><strong>500+</strong><span>Happy Families</span></div>
       </div>
     </div>
   </section>
 
-  <!-- ABOUT STRIP -->
   <div class="about-strip">
     <div class="feature"><div class="feature-icon">🚜</div><h3>Farm Direct</h3><p>No middlemen. Picked fresh and delivered the same day.</p></div>
     <div class="feature"><div class="feature-icon">🌾</div><h3>Naturally Grown</h3><p>No harmful chemicals. Pure, wholesome produce you can trust.</p></div>
-    <div class="feature"><div class="feature-icon">💚</div><h3>Community First</h3><p>Supporting local families and sustainable farming practices.</p></div>
+    <div class="feature"><div class="feature-icon">💚</div><h3>Community First</h3><p>Supporting local families and sustainable farming in Western Kenya.</p></div>
+    <div class="feature"><div class="feature-icon">📦</div><h3>Wide Selection</h3><p>Vegetables, grains, nuts, oilseeds, tubers and more.</p></div>
   </div>
 
-  <!-- PRODUCTS -->
-  <section id="products">
-    <div class="products-header">
-      <p class="section-label">What We Grow</p>
-      <h2 class="section-title">Fresh Picks This Season</h2>
-      <p class="section-sub">All produce is harvested within 24 hours of your order.</p>
-    </div>
-    <div class="products-grid" id="products-grid">
-      <!-- Skeleton placeholders while loading -->
-      <div class="skeleton"><div class="skeleton-img"></div><div class="skeleton-body"><div class="skeleton-line"></div><div class="skeleton-line short"></div></div></div>
-      <div class="skeleton"><div class="skeleton-img"></div><div class="skeleton-body"><div class="skeleton-line"></div><div class="skeleton-line short"></div></div></div>
-      <div class="skeleton"><div class="skeleton-img"></div><div class="skeleton-body"><div class="skeleton-line"></div><div class="skeleton-line short"></div></div></div>
+  <section id="about">
+    <div class="about-img"><img src="https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=800&auto=format&fit=crop" alt="Our Farm" loading="lazy" /></div>
+    <div class="about-text">
+      <p class="section-label">Our Story</p>
+      <h2>Rooted in the Soil of Kakamega</h2>
+      <p>E &M Fresh Harvests was born from a simple belief — that every family deserves access to fresh, clean, and nutritious food grown with love and respect for the land.</p>
+      <p>Nestled along Mumias Road in Kakamega, our farm has been nurturing the soil and our community for years. We grow a wide range of produce — from everyday vegetables and grains to premium nuts, oilseeds, and specialty crops.</p>
+      <p>Every product you see here is grown by us, harvested at peak freshness, and brought straight to your table — no long supply chains, no compromises.</p>
+      <div class="about-values">
+        <div class="about-value"><span>✅</span> No pesticides or harmful chemicals</div>
+        <div class="about-value"><span>✅</span> Harvested within 24 hours of your order</div>
+        <div class="about-value"><span>✅</span> Supporting local farmers and families</div>
+        <div class="about-value"><span>✅</span> Fair prices direct from the farm</div>
+      </div>
     </div>
   </section>
 
-  <!-- CONTACT -->
-  <section id="contact">
-    <div class="contact-visual">
-      <img src="https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=800&auto=format&fit=crop" alt="Farm" loading="lazy" />
+  <section id="products">
+    <div class="section-header">
+      <p class="section-label">Fresh From The Farm</p>
+      <h2 class="section-title">Our Products &amp; Prices</h2>
+      <p class="section-sub">Browse our full range. Sign in to add items to your cart and place an order.</p>
     </div>
-    <div class="contact-info">
+    <div class="filter-bar">
+      <div class="filter-chip active" onclick="filterCat('All',this)">All</div>
+      <div class="filter-chip" onclick="filterCat('Vegetable',this)">🥦 Vegetables</div>
+      <div class="filter-chip" onclick="filterCat('Fruit',this)">🍎 Fruits</div>
+      <div class="filter-chip" onclick="filterCat('Eggs',this)">🥚 Eggs</div>
+      <div class="filter-chip" onclick="filterCat('Tubers',this)">🥔 Tubers</div>
+      <div class="filter-chip" onclick="filterCat('Nuts',this)">🥜 Nuts</div>
+      <div class="filter-chip" onclick="filterCat('Oilseeds',this)">🌻 Oilseeds</div>
+      <div class="filter-chip" onclick="filterCat('Fibre Crops',this)">🌿 Fibre Crops</div>
+      <div class="filter-chip" onclick="filterCat('Grains & Cereals',this)">🌾 Grains</div>
+    </div>
+    <div class="products-grid" id="products-grid">
+      <div class="skeleton"><div class="skel-img"></div><div class="skel-body"><div class="skel-line"></div><div class="skel-line short"></div></div></div>
+      <div class="skeleton"><div class="skel-img"></div><div class="skel-body"><div class="skel-line"></div><div class="skel-line short"></div></div></div>
+      <div class="skeleton"><div class="skel-img"></div><div class="skel-body"><div class="skel-line"></div><div class="skel-line short"></div></div></div>
+      <div class="skeleton"><div class="skel-img"></div><div class="skel-body"><div class="skel-line"></div><div class="skel-line short"></div></div></div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="contact-visual"><img src="https://images.unsplash.com/photo-1500651230702-0e2d8a49d4ad?w=800&auto=format&fit=crop" alt="Farm" loading="lazy" /></div>
+    <div>
       <p class="section-label">Get In Touch</p>
-      <h2 class="section-title">Order Fresh Today</h2>
-      <p class="section-sub">Call or message us to place your order. We deliver within the area or you can pick up directly from the farm.</p>
+      <h2 style="font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:900;color:var(--green-deep);margin-bottom:1.5rem;">Order Fresh Today</h2>
       <div class="contact-card"><div class="contact-icon">📞</div><div><h4>Phone</h4><a href="tel:+254702148896">+254 702 148 896</a></div></div>
       <div class="contact-card"><div class="contact-icon">📍</div><div><h4>Location</h4><p>Mumias Road, Kakamega, Kenya</p></div></div>
       <div class="contact-card"><div class="contact-icon">🕗</div><div><h4>Open Hours</h4><p>Mon – Sat: 7:00 AM – 6:00 PM</p></div></div>
-      <a href="https://wa.me/254702148896?text=Hello%20E &M Fresh Harvests%20Farm!%20I%20would%20like%20to%20place%20an%20order." class="whatsapp-btn" target="_blank" rel="noopener noreferrer">
+      <a href="https://wa.me/254702148896?text=Hello%20E%20%26M%20Fresh%20Harvests!%20I%20would%20like%20to%20place%20an%20order." class="whatsapp-btn" target="_blank" rel="noopener noreferrer">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
         Chat on WhatsApp
       </a>
     </div>
   </section>
 
-  <!-- FOOTER -->
   <footer>
     <div class="footer-logo">🌿 E &M Fresh Harvests</div>
-    <p>© 2025 E &M Fresh Harvests. All rights reserved.</p>
-    <p>Made with 💚 in Kenya</p>
+    <div class="footer-links">
+      <a href="#home">Home</a><a href="#about">About</a>
+      <a href="#products">Products</a><a href="#contact">Contact</a>
+      <a href="shop.html">Shop Online</a>
+    </div>
+    <p>© 2025 E &M Fresh Harvests. Made with 💚 in Kakamega, Kenya</p>
   </footer>
 
-  <!-- PAY MODAL -->
-  <div class="modal-overlay" id="payModal">
-    <div class="modal">
-      <div class="modal-icon">🔒</div>
-      <div class="modal-badge">⏳ Coming Soon</div>
-      <h3>Online Payment</h3>
-      <p>We're working on bringing you a seamless <strong>M-Pesa STK Push</strong> experience. For now, please order via WhatsApp or call us directly!</p>
-      <button class="modal-close" onclick="closePayModal()">Got it, thanks!</button>
+  <div class="modal-overlay" id="auth-modal">
+    <div class="auth-modal">
+      <div class="auth-modal-hero">
+        <button class="close-modal-btn" onclick="closeAuth()">✕</button>
+        <span>🌿</span>
+        <h2>Welcome!</h2>
+        <p>Sign in to add products to your cart and place orders</p>
+      </div>
+      <div class="auth-modal-body">
+        <div class="auth-tabs">
+          <div class="auth-tab active" onclick="switchTab('login')">Sign In</div>
+          <div class="auth-tab" onclick="switchTab('register')">Create Account</div>
+        </div>
+        <div class="auth-form active" id="form-login">
+          <div class="field"><label>Email</label><input type="email" id="login-email" placeholder="you@email.com" /></div>
+          <div class="field"><label>Password</label><input type="password" id="login-pass" placeholder="Your password" onkeydown="if(event.key==='Enter')emailLogin()" /></div>
+          <button class="auth-submit-btn" onclick="emailLogin()">Sign In &amp; Start Shopping →</button>
+          <div class="divider">or</div>
+          <button class="google-btn" onclick="googleLogin()">
+            <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+            Continue with Google
+          </button>
+          <div class="auth-error" id="login-error"></div>
+        </div>
+        <div class="auth-form" id="form-register">
+          <div class="field"><label>Full Name</label><input type="text" id="reg-name" placeholder="Jane Wanjiru" /></div>
+          <div class="field"><label>Email</label><input type="email" id="reg-email" placeholder="you@email.com" /></div>
+          <div class="field"><label>Password</label><input type="password" id="reg-pass" placeholder="Min 6 characters" onkeydown="if(event.key==='Enter')emailRegister()" /></div>
+          <button class="auth-submit-btn" onclick="emailRegister()">Create Account &amp; Shop →</button>
+          <div class="divider">or</div>
+          <button class="google-btn" onclick="googleLogin()">
+            <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+            Sign up with Google
+          </button>
+          <div class="auth-error" id="reg-error"></div>
+        </div>
+      </div>
     </div>
   </div>
 
-  <!-- FIREBASE -->
+  <div class="toast" id="toast"></div>
+
   <script type="module">
-    import { initializeApp }         from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-    import { getFirestore, collection, getDocs, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
-
-    const firebaseConfig = {
-      apiKey:            "AIzaSyDQw26104o-G5QK8WJTJQsesUzUZmKlaMk",
-      authDomain:        "greenroots-farm.firebaseapp.com",
-      projectId:         "greenroots-farm",
-      storageBucket:     "greenroots-farm.firebasestorage.app",
-      messagingSenderId: "49289137888",
-      appId:             "1:49289137888:web:ddd0ed682f1ba4b01a8a85",
-      measurementId:     "G-LL3SSCTLPD"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const db  = getFirestore(app);
-
-    // ── Default products (shown if Firestore is empty) ──
-    const defaultProducts = [
-      { name:'Roma Tomatoes',   category:'Vegetable', price:80,  unit:'kg',        desc:'Firm, ripe, and perfect for cooking or salads.', image:'https://images.unsplash.com/photo-1518977956812-cd3dbadaaf31?w=600&auto=format&fit=crop' },
-      { name:'Fresh Spinach',   category:'Vegetable', price:50,  unit:'bunch',     desc:'Tender, dark-green leaves loaded with iron.',    image:'https://images.unsplash.com/photo-1508302300690-a59b6e7f1ad8?w=600&auto=format&fit=crop' },
-      { name:'Sweet Apples',    category:'Fruit',     price:200, unit:'kg',        desc:'Crisp and naturally sweet. Great for snacking.', image:'https://images.unsplash.com/photo-1568702846914-96b305d2aaeb?w=600&auto=format&fit=crop' },
-      { name:'Free-Range Eggs', category:'Eggs',      price:480, unit:'tray (30)', desc:'Rich golden yolks, superior flavour.',           image:'https://images.unsplash.com/photo-1587735243615-c03f25aaff15?w=600&auto=format&fit=crop' },
-      { name:'Watermelon',      category:'Fruit',     price:150, unit:'piece',     desc:'Jumbo, juicy, and sweet.',                       image:'https://images.unsplash.com/photo-1550258987-190a2d41a8ba?w=600&auto=format&fit=crop' },
-      { name:'Fresh Carrots',   category:'Vegetable', price:60,  unit:'kg',        desc:'Naturally sweet and crunchy.',                   image:'https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?w=600&auto=format&fit=crop' },
-    ];
-
-    function badgeClass(cat) {
-      const map = {
-        'Vegetable': 'badge-vegetable', 'Fruit': 'badge-fruit',
-        'Eggs': 'badge-eggs', 'Tubers': 'badge-tubers',
-        'Nuts': 'badge-nuts', 'Oilseeds': 'badge-oilseeds',
-        'Fibre Crops': 'badge-fibre', 'Grains & Cereals': 'badge-grains',
-        'Other': 'badge-other'
-      };
-      return map[cat] || 'badge-vegetable';
-    }
-
-    function renderProducts(list) {
-      const grid = document.getElementById('products-grid');
-      if (!list.length) { grid.innerHTML = '<p style="color:var(--text-muted)">No products available right now.</p>'; return; }
-      grid.innerHTML = list.map(p => `
-        <div class="card">
-          <div class="card-img">
-            <img src="${p.image || 'https://images.unsplash.com/photo-1500651230702-0e2d8a49d4ad?w=600&auto=format&fit=crop'}" alt="${p.name}" loading="lazy" />
-            <span class="card-badge ${badgeClass(p.category)}">${p.category || 'Fresh'}</span>
-          </div>
-          <div class="card-body">
-            <h3>${p.name}</h3>
-            <p>${p.desc || ''}</p>
-            <div class="card-footer">
-              <div class="price">KSh ${p.price} <span>/ ${p.unit}</span></div>
-              <a href="#contact" class="order-btn">Order Now</a>
-            </div>
-            <button class="pay-btn" onclick="openPayModal()">💳 Pay Now</button>
-          </div>
-        </div>
-      `).join('');
-    }
-
-    // ── PARSE FIRESTORE REST FORMAT ──────────────────
-    function parseDoc(doc) {
-      const out = { id: doc.name.split('/').pop() };
-      for (const [key, val] of Object.entries(doc.fields || {})) {
-        out[key] = val.stringValue ?? val.integerValue ?? val.doubleValue ?? '';
-        if (val.integerValue !== undefined) out[key] = +out[key];
-      }
-      return out;
-    }
-
-    async function loadViaRest(col) {
-      const res  = await fetch(`https://firestore.googleapis.com/v1/projects/greenroots-farm/databases/(default)/documents/${col}`);
-      const data = await res.json();
-      return (data.documents || []).map(parseDoc);
-    }
-
-    // Load products
-    async function loadProducts() {
-      try {
-        const snap = await getDocs(collection(db, 'products'));
-        let list = snap.docs.map(d => ({ id: d.id, ...d.data() }));
-        if (!list.length) list = await loadViaRest('products');
-        if (!list.length) list = defaultProducts;
-        renderProducts(list);
-      } catch(e) {
-        try {
-          const list = await loadViaRest('products');
-          renderProducts(list.length ? list : defaultProducts);
-        } catch(e2) { renderProducts(defaultProducts); }
-      }
-    }
-
-    // Load hero text
-    async function loadHero() {
-      try {
-        const snap = await getDoc(doc(db, 'settings', 'hero'));
-        if (snap.exists()) {
-          const h = snap.data();
-          if (h.badge)    document.getElementById('hero-badge').textContent  = h.badge;
-          if (h.line1)    document.getElementById('hero-heading').innerHTML  = h.line1 + ' <em id="hero-em">' + (h.line2||'Farm') + '</em><br>To Your Table';
-          if (h.sub)      document.getElementById('hero-sub').textContent    = h.sub;
-          if (h.stat1num) document.getElementById('stat1-num').textContent   = h.stat1num;
-          if (h.stat1lbl) document.getElementById('stat1-lbl').textContent   = h.stat1lbl;
-          if (h.stat2num) document.getElementById('stat2-num').textContent   = h.stat2num;
-          if (h.stat2lbl) document.getElementById('stat2-lbl').textContent   = h.stat2lbl;
-          if (h.stat3num) document.getElementById('stat3-num').textContent   = h.stat3num;
-          if (h.stat3lbl) document.getElementById('stat3-lbl').textContent   = h.stat3lbl;
-        }
-      } catch(e) { console.warn('Hero load failed:', e); }
-    }
-
-    loadProducts();
-    loadHero();
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, updateProfile } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+    const app  = initializeApp({ apiKey:"AIzaSyDQw26104o-G5QK8WJTJQsesUzUZmKlaMk", authDomain:"greenroots-farm.firebaseapp.com", projectId:"greenroots-farm", storageBucket:"greenroots-farm.firebasestorage.app", messagingSenderId:"49289137888", appId:"1:49289137888:web:ddd0ed682f1ba4b01a8a85" });
+    const auth = getAuth(app);
+    const provider = new GoogleAuthProvider();
+    const goToShop = () => window.location.href = 'shop.html';
+    const friendly = c => ({'auth/invalid-email':'Invalid email.','auth/user-not-found':'No account found.','auth/wrong-password':'Incorrect password.','auth/email-already-in-use':'Email already registered.','auth/weak-password':'Password needs 6+ characters.','auth/invalid-credential':'Incorrect email or password.','auth/popup-closed-by-user':'Popup closed.'}[c] || 'Something went wrong.');
+    window.emailLogin = async () => { const e=document.getElementById('login-email').value.trim(),p=document.getElementById('login-pass').value,el=document.getElementById('login-error'); el.style.display='none'; try{await signInWithEmailAndPassword(auth,e,p);goToShop();}catch(err){el.textContent=friendly(err.code);el.style.display='block';} };
+    window.emailRegister = async () => { const n=document.getElementById('reg-name').value.trim(),e=document.getElementById('reg-email').value.trim(),p=document.getElementById('reg-pass').value,el=document.getElementById('reg-error'); el.style.display='none'; if(!n){el.textContent='Please enter your name.';el.style.display='block';return;} try{const c=await createUserWithEmailAndPassword(auth,e,p);await updateProfile(c.user,{displayName:n});goToShop();}catch(err){el.textContent=friendly(err.code);el.style.display='block';} };
+    window.googleLogin = async () => { try{await signInWithPopup(auth,provider);goToShop();}catch(err){window.showToast('❌ '+friendly(err.code));} };
   </script>
 
   <script>
-    // Nav hamburger
-    const btn = document.getElementById('hamburger');
-    const links = document.getElementById('nav-links');
-    btn.addEventListener('click', () => links.classList.toggle('open'));
-    links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => links.classList.remove('open')));
-
-    // Pay modal
-    function openPayModal() {
-      document.getElementById('payModal').classList.add('active');
-      document.body.style.overflow = 'hidden';
-    }
-    function closePayModal() {
-      document.getElementById('payModal').classList.remove('active');
-      document.body.style.overflow = '';
-    }
-    document.getElementById('payModal').addEventListener('click', function(e) { if(e.target===this) closePayModal(); });
-    document.addEventListener('keydown', e => { if(e.key==='Escape') closePayModal(); });
+    let allProducts=[], activeFilter='All';
+    function parseDoc(d){const o={id:d.name.split('/').pop()};for(const[k,v]of Object.entries(d.fields||{})){o[k]=v.stringValue??v.integerValue??v.doubleValue??'';if(v.integerValue!==undefined)o[k]=+o[k];}return o;}
+    function badgeClass(c){return({'Vegetable':'badge-vegetable','Fruit':'badge-fruit','Eggs':'badge-eggs','Tubers':'badge-tubers','Nuts':'badge-nuts','Oilseeds':'badge-oilseeds','Fibre Crops':'badge-fibre','Grains & Cereals':'badge-grains','Other':'badge-other'}[c]||'badge-vegetable');}
+    async function loadProducts(){try{const r=await fetch('https://firestore.googleapis.com/v1/projects/greenroots-farm/databases/(default)/documents/products'),d=await r.json();allProducts=(d.documents||[]).map(parseDoc);}catch(e){allProducts=[];}renderGrid();}
+    function renderGrid(){const grid=document.getElementById('products-grid'),list=activeFilter==='All'?allProducts:allProducts.filter(p=>p.category===activeFilter);if(!list.length){grid.innerHTML='<p style="color:var(--text-muted);grid-column:1/-1;text-align:center;padding:3rem">No products in this category yet.</p>';return;}grid.innerHTML=list.map(p=>`<div class="card"><div class="card-img"><img src="${p.image||'https://images.unsplash.com/photo-1500651230702-0e2d8a49d4ad?w=600&auto=format&fit=crop'}" alt="${p.name}" loading="lazy"/><span class="card-badge ${badgeClass(p.category)}">${p.category||'Fresh'}</span></div><div class="card-body"><h3>${p.name}</h3><p>${p.desc||''}</p><div class="card-footer-row"><div class="price">KSh ${p.price} <span>/ ${p.unit}</span></div><button class="shop-now-btn" onclick="openAuth()">View</button></div><button class="add-cart-btn" onclick="openAuth()">🛒 Add to Cart — Sign In</button></div></div>`).join('');}
+    window.filterCat=(cat,el)=>{activeFilter=cat;document.querySelectorAll('.filter-chip').forEach(c=>c.classList.remove('active'));el.classList.add('active');renderGrid();};
+    window.openAuth=()=>{document.getElementById('auth-modal').classList.add('open');document.body.style.overflow='hidden';};
+    window.closeAuth=()=>{document.getElementById('auth-modal').classList.remove('open');document.body.style.overflow='';};
+    window.switchTab=(tab)=>{document.querySelectorAll('.auth-tab').forEach((t,i)=>t.classList.toggle('active',(tab==='login'&&i===0)||(tab==='register'&&i===1)));document.getElementById('form-login').classList.toggle('active',tab==='login');document.getElementById('form-register').classList.toggle('active',tab==='register');};
+    document.getElementById('auth-modal').addEventListener('click',function(e){if(e.target===this)window.closeAuth();});
+    document.addEventListener('keydown',e=>{if(e.key==='Escape')window.closeAuth();});
+    document.getElementById('hamburger').addEventListener('click',()=>document.getElementById('nav-links').classList.toggle('open'));
+    document.querySelectorAll('#nav-links a').forEach(a=>a.addEventListener('click',()=>document.getElementById('nav-links').classList.remove('open')));
+    window.showToast=(msg)=>{const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(window._tt);window._tt=setTimeout(()=>t.classList.remove('show'),2800);};
+    loadProducts();
   </script>
 </body>
 </html>
