@@ -325,16 +325,35 @@
       `).join('');
     }
 
+    // ── PARSE FIRESTORE REST FORMAT ──────────────────
+    function parseDoc(doc) {
+      const out = { id: doc.name.split('/').pop() };
+      for (const [key, val] of Object.entries(doc.fields || {})) {
+        out[key] = val.stringValue ?? val.integerValue ?? val.doubleValue ?? '';
+        if (val.integerValue !== undefined) out[key] = +out[key];
+      }
+      return out;
+    }
+
+    async function loadViaRest(col) {
+      const res  = await fetch(`https://firestore.googleapis.com/v1/projects/greenroots-farm/databases/(default)/documents/${col}`);
+      const data = await res.json();
+      return (data.documents || []).map(parseDoc);
+    }
+
     // Load products
     async function loadProducts() {
       try {
         const snap = await getDocs(collection(db, 'products'));
-        const list = [];
-        snap.forEach(d => list.push(d.data()));
-        renderProducts(list.length ? list : defaultProducts);
-      } catch (e) {
-        console.warn('Firestore error, using defaults:', e);
-        renderProducts(defaultProducts);
+        let list = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+        if (!list.length) list = await loadViaRest('products');
+        if (!list.length) list = defaultProducts;
+        renderProducts(list);
+      } catch(e) {
+        try {
+          const list = await loadViaRest('products');
+          renderProducts(list.length ? list : defaultProducts);
+        } catch(e2) { renderProducts(defaultProducts); }
       }
     }
 

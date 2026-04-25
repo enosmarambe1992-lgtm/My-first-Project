@@ -470,13 +470,34 @@
     { id:'d6', name:'Fresh Carrots',   category:'Vegetable', price:60,  unit:'kg',        desc:'Naturally sweet and crunchy.',        image:'https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?w=600&auto=format&fit=crop' },
   ];
 
+  // ── PARSE FIRESTORE REST FORMAT ──────────────────────
+  function parseDoc(doc) {
+    const out = { id: doc.name.split('/').pop() };
+    for (const [key, val] of Object.entries(doc.fields || {})) {
+      out[key] = val.stringValue ?? val.integerValue ?? val.doubleValue ?? '';
+      if (val.integerValue !== undefined) out[key] = +out[key];
+    }
+    return out;
+  }
+
+  async function loadViaRest(col) {
+    const res  = await fetch(`https://firestore.googleapis.com/v1/projects/greenroots-farm/databases/(default)/documents/${col}`);
+    const data = await res.json();
+    return (data.documents || []).map(parseDoc);
+  }
+
   async function loadProducts() {
     try {
       const snap = await getDocs(collection(db, 'products'));
-      allProducts = snap.docs.map(d => ({ id: d.id, ...d.data() }));
-      if (!allProducts.length) allProducts = defaultProducts;
+      let list = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+      if (!list.length) list = await loadViaRest('products');
+      if (!list.length) list = defaultProducts;
+      allProducts = list;
     } catch(e) {
-      allProducts = defaultProducts;
+      try {
+        const list = await loadViaRest('products');
+        allProducts = list.length ? list : defaultProducts;
+      } catch(e2) { allProducts = defaultProducts; }
     }
     renderGrid();
   }

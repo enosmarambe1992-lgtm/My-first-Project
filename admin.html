@@ -334,12 +334,53 @@
   window._products = [];
   window._orders   = [];
 
+  // ── PARSE FIRESTORE REST FORMAT ─────────────────────
+  function parseDoc(doc) {
+    const out = { _id: doc.name.split('/').pop() };
+    for (const [key, val] of Object.entries(doc.fields || {})) {
+      out[key] = val.stringValue ?? val.integerValue ?? val.doubleValue ?? val.booleanValue ?? '';
+      if (val.integerValue !== undefined) out[key] = +out[key];
+    }
+    return out;
+  }
+
+  // ── LOAD VIA REST API (most reliable) ───────────────
+  async function loadViaRest(collectionName) {
+    const url = `https://firestore.googleapis.com/v1/projects/greenroots-farm/databases/(default)/documents/${collectionName}`;
+    const res  = await fetch(url);
+    const data = await res.json();
+    return (data.documents || []).map(parseDoc);
+  }
+
+  // ── LOAD PRODUCTS ────────────────────────────────────
+  async function loadAllData() {
+    try {
+      const [prods, ords] = await Promise.all([
+        loadViaRest('products'),
+        loadViaRest('orders')
+      ]);
+      window._products = prods;
+      window._orders   = ords;
+      renderProducts();
+      renderOrders();
+      renderOverviewOrders();
+      renderSales();
+      updateStats();
+      document.getElementById('fb-badge').className     = 'firebase-badge connected';
+      document.getElementById('fb-badge').textContent   = '🔥 Firebase Connected';
+    } catch(e) {
+      console.error('Load error:', e);
+      document.getElementById('fb-badge').className   = 'firebase-badge';
+      document.getElementById('fb-badge').textContent = '❌ Load Failed';
+    }
+  }
+
   // ── REALTIME LISTENERS ──────────────────────────────
   onSnapshot(productsRef, snap => {
     window._products = snap.docs.map(d => ({ _id: d.id, ...d.data() }));
     renderProducts();
     updateStats();
-  });
+  }, () => loadAllData()); // fallback to REST if SDK fails
 
   onSnapshot(ordersRef, snap => {
     window._orders = snap.docs.map(d => ({ _id: d.id, ...d.data() }));
@@ -347,7 +388,7 @@
     renderOverviewOrders();
     renderSales();
     updateStats();
-  });
+  }, () => {}); // silent fallback
 
   // Load hero
   async function loadHero() {
