@@ -197,6 +197,50 @@
     .success-screen .done-btn { background: var(--green-mid); color: #fff; border: none; border-radius: 50px; padding: .8rem 2rem; font-size: .95rem; font-weight: 700; font-family: 'Lato', sans-serif; cursor: pointer; transition: background var(--transition); }
     .success-screen .done-btn:hover { background: var(--green-deep); }
 
+    /* ── PRODUCT VIEW MODAL ──────────────────────────── */
+    .pm-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);backdrop-filter:blur(6px);z-index:550;align-items:center;justify-content:center;padding:1rem}
+    .pm-overlay.open{display:flex}
+    .pm-box{background:#fff;border-radius:20px;width:100%;max-width:560px;max-height:90vh;overflow-y:auto;box-shadow:var(--shadow-lg);animation:popUp .3s ease}
+    .pm-img-wrap{height:240px;overflow:hidden;border-radius:20px 20px 0 0;position:relative}
+    .pm-img-wrap img{width:100%;height:100%;object-fit:cover}
+    .pm-close{position:absolute;top:12px;right:12px;background:rgba(0,0,0,.4);color:#fff;border:none;border-radius:50%;width:34px;height:34px;font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center}
+    .pm-body{padding:1.5rem}
+    .pm-body h2{font-family:'Playfair Display',serif;font-size:1.45rem;color:var(--green-deep);margin-bottom:.3rem}
+    .pm-price-tag{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:var(--green-mid);margin-bottom:.5rem}
+    .pm-desc{font-size:.9rem;color:var(--text-mid);margin-bottom:1rem;line-height:1.6}
+    .pm-avg{margin-bottom:1rem;display:flex;align-items:center;gap:.5rem;flex-wrap:wrap}
+    .pm-divider{border:none;border-top:1px solid var(--border);margin:1.1rem 0}
+    .pm-reviews-title{font-family:'Playfair Display',serif;font-size:1.05rem;color:var(--green-deep);margin-bottom:.8rem}
+    .pm-review-item{background:var(--green-pale);border-radius:10px;padding:.9rem;margin-bottom:.7rem;border:1px solid var(--border)}
+    .pm-rev-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:.4rem}
+    .pm-rev-info{display:flex;align-items:center;gap:.5rem}
+    .pm-rev-avatar{width:30px;height:30px;border-radius:50%;background:var(--green-mid);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.82rem}
+    .pm-rev-name{font-weight:700;font-size:.88rem;color:var(--green-deep)}
+    .pm-rev-date{font-size:.7rem;color:var(--text-muted)}
+    .pm-rev-stars{color:#e9a827;font-size:.95rem}
+    .pm-rev-text{font-size:.86rem;color:var(--text-mid)}
+    .pm-write-review{background:var(--green-pale);border-radius:12px;padding:1.2rem;margin-top:1rem;border:1.5px dashed var(--green-light)}
+    .pm-write-review h4{font-family:'Playfair Display',serif;font-size:1rem;color:var(--green-deep);margin-bottom:.3rem}
+    .pm-write-review p{font-size:.78rem;color:var(--text-muted);margin-bottom:.8rem}
+    .pm-star-picker{display:flex;gap:.3rem;margin-bottom:.8rem}
+    .pm-star-picker span{font-size:1.6rem;cursor:pointer;color:#ddd;transition:transform var(--transition)}
+    .pm-star-picker span.active,.pm-star-picker span:hover{color:#e9a827;transform:scale(1.2)}
+    .pm-field{margin-bottom:.8rem}
+    .pm-field label{display:block;font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--text-mid);margin-bottom:.3rem}
+    .pm-field textarea{width:100%;padding:.7rem .9rem;border:1.5px solid var(--border);border-radius:8px;font-size:.9rem;font-family:'Lato',sans-serif;outline:none;background:#fff;transition:border-color var(--transition);resize:vertical;min-height:75px}
+    .pm-field textarea:focus{border-color:var(--green-soft)}
+    .pm-submit-btn{width:100%;padding:.75rem;background:var(--green-mid);color:#fff;border:none;border-radius:50px;font-size:.9rem;font-weight:700;font-family:'Lato',sans-serif;cursor:pointer;transition:background var(--transition);margin-bottom:.7rem}
+    .pm-submit-btn:hover{background:var(--green-deep)}
+    .pm-cart-btn{width:100%;padding:.82rem;background:var(--amber);color:var(--brown);border:none;border-radius:50px;font-size:.95rem;font-weight:700;font-family:'Lato',sans-serif;cursor:pointer;transition:background var(--transition),transform var(--transition);display:flex;align-items:center;justify-content:center;gap:.5rem;margin-bottom:.7rem}
+    .pm-cart-btn:hover{background:#d4931f;transform:scale(1.02)}
+    .pm-cart-btn.added{background:var(--green-soft);color:#fff}
+    .prod-cat-badge{position:absolute;top:10px;left:10px;font-size:.7rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:.25rem .7rem;border-radius:50px;background:var(--green-soft);color:#fff}
+    .badge-vegetable{background:#52b788}.badge-fruit{background:#e9a827;color:#6b4226}
+    .badge-eggs{background:#f4a261}.badge-tubers{background:#a0522d}
+    .badge-nuts{background:#8b6914}.badge-oilseeds{background:#c9a84c;color:#3a2a00}
+    .badge-fibre{background:#6c757d}.badge-grains{background:#d4a017;color:#3a2a00}
+    .badge-other{background:#6b8f71}
+
     /* TOAST */
     .toast { position: fixed; bottom: 1.5rem; left: 50%; transform: translateX(-50%); background: var(--green-deep); color: #fff; padding: .8rem 1.6rem; border-radius: 50px; font-weight: 700; font-size: .9rem; box-shadow: var(--shadow-md); display: none; align-items: center; gap: .5rem; z-index: 9999; white-space: nowrap; }
     .toast.show { display: flex; animation: slideUp .3s ease; }
@@ -303,6 +347,40 @@
 </div>
 
 <!-- ── CART DRAWER ──────────────────────────────────── -->
+  <!-- ── PRODUCT VIEW MODAL ────────────────────────────── -->
+  <div class="pm-overlay" id="product-modal">
+    <div class="pm-box">
+      <div class="pm-img-wrap">
+        <img id="pm-img" src="" alt="" />
+        <span id="pm-badge" class="prod-cat-badge"></span>
+        <button class="pm-close" onclick="closePM()">✕</button>
+      </div>
+      <div class="pm-body">
+        <h2 id="pm-name"></h2>
+        <div class="pm-price-tag" id="pm-price-tag"></div>
+        <div class="pm-avg" id="pm-avg"></div>
+        <p class="pm-desc" id="pm-desc"></p>
+        <button class="pm-cart-btn" id="pm-cart-btn" onclick="addFromModal()">🛒 Add to Cart</button>
+        <hr class="pm-divider" />
+        <div class="pm-reviews-title">Customer Reviews</div>
+        <div id="pm-reviews-list"></div>
+        <div class="pm-write-review">
+          <h4>✍️ Leave a Review</h4>
+          <p id="pm-rev-user" style="font-size:.8rem;color:var(--green-mid);font-weight:700;margin-bottom:.5rem"></p>
+          <div class="pm-star-picker" id="pm-star-picker">
+            <span onclick="setProdRating(1)">★</span>
+            <span onclick="setProdRating(2)">★</span>
+            <span onclick="setProdRating(3)">★</span>
+            <span onclick="setProdRating(4)">★</span>
+            <span onclick="setProdRating(5)">★</span>
+          </div>
+          <div class="pm-field"><label>Your Review</label><textarea id="pm-rev-text" placeholder="How was this product? Quality, freshness, value..."></textarea></div>
+          <button class="pm-submit-btn" onclick="submitProductReview()">Submit Review 🌿</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
 <div class="cart-overlay" id="cart-overlay" onclick="closeCart()"></div>
 <div class="cart-drawer" id="cart-drawer">
   <div class="cart-header">
@@ -499,8 +577,40 @@
         allProducts = list.length ? list : defaultProducts;
       } catch(e2) { allProducts = defaultProducts; }
     }
+    await loadProductReviews();
     renderGrid();
   }
+
+  // ── PRODUCT REVIEWS ─────────────────────────────────
+  let productReviews = {};
+  let currentProductId = null;
+  let prodRating = 0;
+
+  async function loadProductReviews() {
+    try {
+      const list = await loadViaRest('productReviews');
+      productReviews = {};
+      list.forEach(r => {
+        const pid = r.productId || '';
+        if (!productReviews[pid]) productReviews[pid] = [];
+        productReviews[pid].push(r);
+      });
+    } catch(e) {}
+  }
+
+  function getProductRating(pid) {
+    const revs = productReviews[pid] || [];
+    if (!revs.length) return { avg: 0, count: 0 };
+    return { avg: (revs.reduce((s,r) => s + (+r.rating||5), 0) / revs.length).toFixed(1), count: revs.length };
+  }
+
+  function renderStars(avg, small) {
+    const full=Math.floor(avg), half=avg-full>=0.5, empty=5-full-(half?1:0);
+    const sz = small ? 'font-size:.85rem' : 'font-size:1rem';
+    return `<span style="color:#e9a827;letter-spacing:1px;${sz}">${'★'.repeat(full)}${half?'½':''}${'☆'.repeat(empty)}</span>`;
+  }
+
+  function badgeClass(c){return({'Vegetable':'badge-vegetable','Fruit':'badge-fruit','Eggs':'badge-eggs','Tubers':'badge-tubers','Nuts':'badge-nuts','Oilseeds':'badge-oilseeds','Fibre Crops':'badge-fibre','Grains & Cereals':'badge-grains','Other':'badge-other'}[c]||'badge-vegetable');}
 
   // ── FILTER ──────────────────────────────────────────
   window.filterCat = function(cat, el) {
@@ -517,28 +627,127 @@
       grid.innerHTML = '<div class="empty-state"><span>🌾</span><p>No products in this category yet.</p></div>';
       return;
     }
-    grid.innerHTML = list.map(p => `
-      <div class="prod-card">
-        <div class="prod-card-img">
-          <img src="${p.image || 'https://images.unsplash.com/photo-1500651230702-0e2d8a49d4ad?w=600&auto=format&fit=crop'}" alt="${p.name}" loading="lazy" />
-          <span class="prod-cat-badge">${p.category || 'Fresh'}</span>
-        </div>
-        <div class="prod-card-body">
-          <h3>${p.name}</h3>
-          <p>${p.desc || ''}</p>
-          <div class="prod-price">KSh ${p.price} <span>/ ${p.unit}</span></div>
-          <div class="qty-row">
-            <button class="qty-btn" onclick="changeQty('${p.id}',-1)">−</button>
-            <span class="qty-val" id="qty-${p.id}">${cart[p.id]?.qty || 1}</span>
-            <button class="qty-btn" onclick="changeQty('${p.id}',1)">+</button>
+    grid.innerHTML = list.map(p => {
+      const {avg, count} = getProductRating(p.id);
+      const ratingHtml = count > 0
+        ? `<div style="display:flex;align-items:center;gap:.3rem;margin-bottom:.5rem">${renderStars(avg,true)}<span style="font-size:.75rem;color:var(--text-muted)">${avg} (${count})</span></div>`
+        : `<div style="font-size:.75rem;color:var(--text-muted);margin-bottom:.5rem">No reviews yet</div>`;
+      return `
+        <div class="prod-card">
+          <div class="prod-card-img">
+            <img src="${p.image || 'https://images.unsplash.com/photo-1500651230702-0e2d8a49d4ad?w=600&auto=format&fit=crop'}" alt="${p.name}" loading="lazy" />
+            <span class="prod-cat-badge ${badgeClass(p.category)}">${p.category || 'Fresh'}</span>
           </div>
-          <button class="add-cart-btn ${cart[p.id] ? 'added' : ''}" id="btn-${p.id}" onclick="addToCart('${p.id}')">
-            ${cart[p.id] ? '✅ Added' : '🛒 Add to Cart'}
-          </button>
-        </div>
-      </div>
-    `).join('');
+          <div class="prod-card-body">
+            <h3>${p.name}</h3>
+            ${ratingHtml}
+            <p>${p.desc || ''}</p>
+            <div class="prod-price">KSh ${p.price} <span>/ ${p.unit}</span></div>
+            <div style="display:flex;gap:.5rem;margin-bottom:.6rem">
+              <button class="qty-btn" onclick="changeQty('${p.id}',-1)">−</button>
+              <span class="qty-val" id="qty-${p.id}" style="display:flex;align-items:center;font-weight:700;min-width:24px;justify-content:center">${cart[p.id]?.qty || 1}</span>
+              <button class="qty-btn" onclick="changeQty('${p.id}',1)">+</button>
+              <button style="margin-left:auto;background:var(--green-pale);border:1.5px solid var(--border);border-radius:50px;padding:.3rem .9rem;font-size:.8rem;font-weight:700;cursor:pointer;font-family:'Lato',sans-serif;color:var(--green-mid)" onclick="openProductView('${p.id}')">👁 View</button>
+            </div>
+            <button class="add-cart-btn ${cart[p.id] ? 'added' : ''}" id="btn-${p.id}" onclick="addToCart('${p.id}')">
+              ${cart[p.id] ? '✅ Added' : '🛒 Add to Cart'}
+            </button>
+          </div>
+        </div>`;
+    }).join('');
   }
+
+  // ── PRODUCT VIEW MODAL ───────────────────────────────
+  window.openProductView = function(pid) {
+    currentProductId = pid;
+    prodRating = 0;
+    const p = allProducts.find(p => p.id === pid);
+    if (!p) return;
+    const {avg, count} = getProductRating(pid);
+    const revs = productReviews[pid] || [];
+    document.getElementById('pm-img').src = p.image || '';
+    document.getElementById('pm-name').textContent = p.name;
+    document.getElementById('pm-price-tag').innerHTML = `KSh ${p.price} <span style="font-size:.8rem;color:var(--text-muted);font-family:'Lato',sans-serif">/ ${p.unit}</span>`;
+    document.getElementById('pm-desc').textContent = p.desc || '';
+    document.getElementById('pm-badge').textContent = p.category || 'Fresh';
+    document.getElementById('pm-badge').className = `prod-cat-badge ${badgeClass(p.category)}`;
+    document.getElementById('pm-avg').innerHTML = count > 0
+      ? `${renderStars(avg)} <span style="font-size:.88rem;color:var(--text-muted)">${avg} / 5 (${count} review${count===1?'':'s'})</span>`
+      : `<span style="color:var(--text-muted);font-size:.88rem">No reviews yet — be the first!</span>`;
+    document.getElementById('pm-reviews-list').innerHTML = revs.length
+      ? revs.slice().reverse().map(r => `
+          <div class="pm-review-item">
+            <div class="pm-rev-header">
+              <div class="pm-rev-info">
+                <div class="pm-rev-avatar">${(r.name||'?').charAt(0).toUpperCase()}</div>
+                <div><div class="pm-rev-name">${r.name||'Anonymous'}</div><div class="pm-rev-date">${r.date||''}</div></div>
+              </div>
+              <span class="pm-rev-stars">${'★'.repeat(+r.rating||5)}${'☆'.repeat(5-(+r.rating||5))}</span>
+            </div>
+            <p class="pm-rev-text">${r.text||''}</p>
+          </div>`).join('')
+      : '<p style="color:var(--text-muted);font-size:.88rem;text-align:center;padding:1rem">No reviews yet for this product.</p>';
+    // update add to cart button in modal
+    const inCart = !!cart[pid];
+    document.getElementById('pm-cart-btn').className = `pm-cart-btn${inCart?' added':''}`;
+    document.getElementById('pm-cart-btn').textContent = inCart ? '✅ Added to Cart' : '🛒 Add to Cart';
+    // reset review form
+    prodRating = 0;
+    document.querySelectorAll('#pm-star-picker span').forEach(s => s.classList.remove('active'));
+    document.getElementById('pm-rev-text').value = '';
+    // show logged in user name
+    if (currentUser) document.getElementById('pm-rev-user').textContent = `Reviewing as: ${currentUser.displayName || currentUser.email}`;
+    document.getElementById('product-modal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  };
+
+  window.closePM = function() {
+    document.getElementById('product-modal').classList.remove('open');
+    document.body.style.overflow = '';
+  };
+
+  window.setProdRating = function(r) {
+    prodRating = r;
+    document.querySelectorAll('#pm-star-picker span').forEach((s,i) => s.classList.toggle('active', i < r));
+  };
+
+  window.addFromModal = function() {
+    if (!currentProductId) return;
+    addToCart(currentProductId);
+    const btn = document.getElementById('pm-cart-btn');
+    btn.className = 'pm-cart-btn added';
+    btn.textContent = '✅ Added to Cart';
+  };
+
+  window.submitProductReview = async function() {
+    const text = document.getElementById('pm-rev-text').value.trim();
+    if (!text) { showToast('❌ Please write a review'); return; }
+    if (!prodRating) { showToast('❌ Please select a star rating'); return; }
+    if (!currentUser) { showToast('❌ Please sign in to leave a review'); return; }
+    const name = currentUser.displayName || currentUser.email.split('@')[0];
+    const date = new Date().toISOString().split('T')[0];
+    try {
+      await fetch('https://firestore.googleapis.com/v1/projects/greenroots-farm/databases/(default)/documents/productReviews', {
+        method:'POST', headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({ fields: {
+          productId:{stringValue:currentProductId},
+          name:{stringValue:name},
+          rating:{integerValue:prodRating},
+          text:{stringValue:text},
+          date:{stringValue:date},
+          likes:{integerValue:0},
+          email:{stringValue:currentUser.email}
+        }})
+      });
+      if (!productReviews[currentProductId]) productReviews[currentProductId]=[];
+      productReviews[currentProductId].push({ id:Date.now().toString(), productId:currentProductId, name, rating:prodRating, text, date });
+      showToast('✅ Review submitted! Thank you.');
+      openProductView(currentProductId);
+      renderGrid();
+    } catch(e) { showToast('❌ Could not submit review. Try again.'); }
+  };
+
+  document.getElementById('product-modal').addEventListener('click', function(e){ if(e.target===this) window.closePM(); });
 
   // ── CART ────────────────────────────────────────────
   window.changeQty = function(id, delta) {
