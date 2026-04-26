@@ -260,15 +260,8 @@
   </nav>
 
   <section id="home">
-    <!-- Carousel slides -->
-    <div class="hero-slides" id="hero-slides">
-      <div class="hero-slide active" style="background-image:url('https://images.unsplash.com/photo-1518977956812-cd3dbadaaf31?w=1400&auto=format&fit=crop')"></div>
-      <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1568702846914-96b305d2aaeb?w=1400&auto=format&fit=crop')"></div>
-      <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1550258987-190a2d41a8ba?w=1400&auto=format&fit=crop')"></div>
-      <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?w=1400&auto=format&fit=crop')"></div>
-      <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1603431777782-912e3b76f60d?w=1400&auto=format&fit=crop')"></div>
-      <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1587735243615-c03f25aaff15?w=1400&auto=format&fit=crop')"></div>
-    </div>
+    <!-- Carousel slides built dynamically from product images -->
+    <div class="hero-slides" id="hero-slides"></div>
     <!-- Dots -->
     <div class="hero-dots" id="hero-dots"></div>
     <div class="hero-inner">
@@ -556,6 +549,9 @@
         const r=await fetch('https://firestore.googleapis.com/v1/projects/greenroots-farm/databases/(default)/documents/products'),d=await r.json();
         allProducts=(d.documents||[]).map(parseDoc);
       } catch(e){allProducts=[];}
+      // Feed product images into carousel
+      const images = allProducts.filter(p=>p.image).map(p=>p.image);
+      if (images.length) initCarousel(images);
       await loadProductReviews();
       renderGrid();
     }
@@ -781,26 +777,36 @@
     })();
 
     // ── HERO CAROUSEL ─────────────────────────────────
-    (function() {
-      const slides = document.querySelectorAll('.hero-slide');
-      const dotsEl = document.getElementById('hero-dots');
+    function initCarousel(images) {
+      const slidesEl = document.getElementById('hero-slides');
+      const dotsEl   = document.getElementById('hero-dots');
+      slidesEl.innerHTML = '';
+      dotsEl.innerHTML   = '';
       let current = 0;
-      // build dots
-      slides.forEach((_,i) => {
-        const d = document.createElement('div');
-        d.className = 'hero-dot' + (i===0?' active':'');
-        d.onclick = () => goTo(i);
-        dotsEl.appendChild(d);
+
+      images.forEach((img, i) => {
+        const slide = document.createElement('div');
+        slide.className = 'hero-slide' + (i===0?' active':'');
+        slide.style.backgroundImage = `url('${img}')`;
+        slidesEl.appendChild(slide);
+        const dot = document.createElement('div');
+        dot.className = 'hero-dot' + (i===0?' active':'');
+        dot.onclick = () => goTo(i);
+        dotsEl.appendChild(dot);
       });
+
       function goTo(n) {
-        slides[current].classList.remove('active');
-        document.querySelectorAll('.hero-dot')[current].classList.remove('active');
-        current = (n + slides.length) % slides.length;
-        slides[current].classList.add('active');
-        document.querySelectorAll('.hero-dot')[current].classList.add('active');
+        const allSlides = document.querySelectorAll('.hero-slide');
+        const allDots   = document.querySelectorAll('.hero-dot');
+        allSlides[current].classList.remove('active');
+        allDots[current].classList.remove('active');
+        current = (n + allSlides.length) % allSlides.length;
+        allSlides[current].classList.add('active');
+        allDots[current].classList.add('active');
       }
+
       setInterval(() => goTo(current + 1), 4500);
-    })();
+    }
 
     loadProducts();
   </script>
