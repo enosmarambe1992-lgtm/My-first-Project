@@ -143,10 +143,10 @@
     <h1>E&M Fresh Harvests Admin</h1>
     <p>Sign in to manage your farm dashboard</p>
     <div class="input-group"><span class="icon">👤</span><input type="text" id="username" placeholder="Username" /></div>
-    <div class="input-group"><span class="icon">🔒</span><input type="password" id="password" placeholder="Password" onkeydown="if(event.key==='Enter')doLogin()" /></div>
+    <div class="input-group" style="position:relative"><span class="icon">🔒</span><input type="password" id="password" placeholder="Password" onkeydown="if(event.key==='Enter')doLogin()" /><button type="button" onclick="togglePassword()" id="toggle-pass" style="position:absolute;right:.9rem;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;font-size:1rem;color:var(--text-muted)">👁</button></div>
     <button class="login-btn" onclick="doLogin()">Sign In →</button>
     <div class="login-error" id="login-error">❌ Incorrect username or password</div>
-    <div class="login-hint">💡 Default: <strong>admin</strong> / <strong>farm2025</strong><br><span style="font-size:.72rem">Change in admin.html script section</span></div>
+    <div class="login-hint">🔐 Authorized personnel only</div>
   </div>
 </div>
 
@@ -316,7 +316,7 @@
 
   // ── CHANGE YOUR LOGIN HERE ──────────────────────────
   window.ADMIN_USER = 'CEO';
-  window.ADMIN_PASS = 'Maseno2001.&';
+  window.ADMIN_PASS = 'Maseno200$.1';
 
   const firebaseConfig = {
     apiKey:            "AIzaSyDQw26104o-G5QK8WJTJQsesUzUZmKlaMk",
@@ -758,6 +758,15 @@
 </script>
 
 <script>
+  // ── TOGGLE PASSWORD ──────────────────────────────────
+  function togglePassword() {
+    const input  = document.getElementById('password');
+    const btn    = document.getElementById('toggle-pass');
+    const isHidden = input.type === 'password';
+    input.type   = isHidden ? 'text' : 'password';
+    btn.textContent = isHidden ? '🙈' : '👁';
+  }
+
   // ── LOGIN ────────────────────────────────────────────
   function doLogin() {
     const u = document.getElementById('username').value.trim();
